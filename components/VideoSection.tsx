@@ -7,7 +7,7 @@ export function VideoSection() {
         <div className="section-header recordings-header">
           <h2 className="section-title recordings-title">
             Posłuchaj nagrań hałasu z Toru Poznań wykonanych na Ławicy, os. Bajkowym,
-            w Przeźmierowie i Smochowicach
+            w Przeźmierowie, Smochowicach.
           </h2>
           <div className="recordings-intro">
             <p>
