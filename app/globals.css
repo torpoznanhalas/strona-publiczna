@@ -1188,3 +1188,81 @@ h6,
     padding: 22px 18px;
   }
 }
+
+
+/* Expanded mechanism section */
+
+.mechanism-intro {
+  display: grid;
+  max-width: 900px;
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.mechanism-intro p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+
+.timeline-item p + p {
+  margin-top: 14px;
+}
+
+.timeline-item p strong {
+  color: var(--text);
+}
+
+.timeline-source {
+  font-size: 0.9rem !important;
+}
+
+.timeline-source a {
+  color: var(--accent);
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.timeline-source a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.mechanism-summary {
+  max-width: 980px;
+  margin-top: 58px;
+  padding: 38px 42px;
+  border: 1px solid var(--line);
+  background: var(--text);
+  color: var(--background);
+}
+
+.mechanism-summary .eyebrow {
+  margin-bottom: 20px;
+}
+
+.mechanism-summary p {
+  max-width: 840px;
+  margin: 0;
+  font-size: 1.08rem;
+}
+
+.mechanism-summary p + p {
+  margin-top: 16px;
+}
+
+.mechanism-summary-final {
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  font-size: clamp(1.32rem, 2.2vw, 1.85rem) !important;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+@media (max-width: 760px) {
+  .mechanism-summary {
+    margin-top: 42px;
+    padding: 28px 24px;
+  }
+}
