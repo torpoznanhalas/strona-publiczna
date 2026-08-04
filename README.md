@@ -35,3 +35,7 @@ Nowe wpisy otrzymują status `pending`. Licznik obejmuje wyłącznie wpisy ze st
 2. Skonfiguruj ochronę formularza przed botami.
 3. Uzupełnij NIP i REGON po ich nadaniu.
 4. Każde oskarżenie personalne lub dotyczące bezprawności oprzyj na wiarygodnym źródle.
+
+## Publiczny pasek ostatnich osób wspierających
+
+Endpoint `/api/supporters` zwraca licznik oraz maksymalnie trzy ostatnie zatwierdzone osoby, które zaznaczyły zgodę na publiczną prezentację. Pasek nie ujawnia adresu e-mail, kodu pocztowego, adresu IP ani miejscowości.

@@ -53,16 +53,50 @@ async function getCount(query: string) {
   return parseExactCount(response);
 }
 
+type PublicSupporterRow = {
+  first_name?: unknown;
+  last_initial?: unknown;
+  created_at?: unknown;
+};
+
+async function getLatestPublicSupporters() {
+  const response = await supabaseAdminFetch(
+    "/supporters?select=first_name,last_initial,created_at&status=eq.approved&public_display_consent=eq.true&order=created_at.desc&limit=3",
+    { method: "GET" }
+  );
+
+  if (!response.ok) {
+    throw new Error(`Błąd bazy danych: ${response.status}`);
+  }
+
+  const rows = (await response.json()) as PublicSupporterRow[];
+
+  return rows
+    .map((row) => ({
+      firstName: String(row.first_name ?? "").trim().slice(0, 80),
+      lastInitial: String(row.last_initial ?? "").trim().slice(0, 1).toUpperCase(),
+      createdAt: String(row.created_at ?? "")
+    }))
+    .filter((row) => row.firstName.length >= 2 && row.lastInitial.length === 1 && row.createdAt);
+}
+
 export async function GET() {
   try {
     const count = await getCount("status=eq.approved");
+    let supporters: Awaited<ReturnType<typeof getLatestPublicSupporters>> = [];
+
+    try {
+      supporters = await getLatestPublicSupporters();
+    } catch {
+      // Awaria listy publicznej nie może wyzerować działającego licznika.
+    }
 
     return NextResponse.json(
-      { count },
+      { count, supporters },
       { headers: { "Cache-Control": "no-store, max-age=0" } }
     );
   } catch {
-    return NextResponse.json({ count: 0 }, { status: 200 });
+    return NextResponse.json({ count: 0, supporters: [] }, { status: 200 });
   }
 }
 

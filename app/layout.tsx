@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     locale: "pl_PL",
     url: "https://torpoznanhalas.pl",
     siteName: "Tor Poznań: Hałas",
-    title: "Tor Poznań przekraczał normy. Potem ruszyła walka o zmianę zasad.",
+    title: "Tor Poznań od lat przekracza normy hałasu. Mówimy STOP!",
     description:
-      "Posłuchaj nagrań i poprzyj egzekwowanie norm hałasu przy Torze Poznań."
+      "Poznaj fakty, posłuchaj nagrań i poprzyj egzekwowanie norm hałasu przy Torze Poznań."
   },
   twitter: {
     card: "summary_large_image",

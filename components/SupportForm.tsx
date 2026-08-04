@@ -169,8 +169,8 @@ export function SupportForm() {
           onChange={(event) => update("publicDisplay", event.target.checked)}
         />
         <span>
-          Zgadzam się na publiczne pokazanie zapisu w formie: imię, pierwsza litera nazwiska i
-          miejscowość. Adres e-mail i kod pocztowy pozostaną niepubliczne.
+          Zgadzam się na publiczne pokazanie zapisu w formie: imię, pierwsza litera nazwiska,
+          miejscowość i data dołączenia. Adres e-mail i kod pocztowy pozostaną niepubliczne.
         </span>
       </label>
 

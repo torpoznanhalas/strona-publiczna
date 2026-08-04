@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SupporterCounter } from "@/components/SupporterCounter";
+import { SupporterActivity } from "@/components/SupporterActivity";
 import { SupportForm } from "@/components/SupportForm";
 import { VideoSection } from "@/components/VideoSection";
 
@@ -39,16 +40,18 @@ export default function Home() {
           <div className="hero-main">
             <p className="eyebrow">Tor Poznań · hałas · fakty</p>
             <h1>
-              Tor Poznań przekraczał normy. Potem ruszyła walka o <strong>zmianę zasad.</strong>
+              Tor Poznań <em>od lat przekracza normy hałasu</em>, szkodząc zdrowiu tysięcy
+              Poznaniaków. A teraz próbuje zmienić prawo. <em>Mówimy STOP!</em>
             </h1>
             <p className="hero-description">
-              Gdy organ ochrony środowiska utrzymał decyzję o wstrzymaniu użytkowania instalacji
-              na Torze Poznań z powodu przekroczeń hałasu, uruchomiono odwołanie, rozmowy o
-              podniesieniu dopuszczalnych poziomów i projekt zmiany ustawy. <strong>Pokazujemy mechanizm.</strong>
+              Gdy Główny Inspektor Ochrony Środowiska utrzymał decyzję o wstrzymaniu użytkowania
+              Toru Poznań z powodu przekroczeń hałasu, uruchomiono odwołanie, rozmowy o podniesieniu
+              dopuszczalnych poziomów i projekt zmiany ustawy. Do rozmów nie zaproszono mieszkańców.
+              <strong>Dlatego pokazujemy fakty.</strong>
             </p>
             <div className="button-row hero-buttons">
               <a className="button button-accent" href="#mechanizm">
-                Zobacz mechanizm
+                Poznaj fakty
               </a>
               <a className="button button-ghost" href="#nagrania">
                 Posłuchaj hałasu
@@ -66,7 +69,7 @@ export default function Home() {
         </div>
       </section>
 
-
+      <SupporterActivity />
 
       <VideoSection />
 
