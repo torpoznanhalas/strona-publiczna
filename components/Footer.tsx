@@ -12,6 +12,8 @@ export function Footer() {
           </p>
         </div>
         <div className="footer-links">
+          <Link href="/fakty">Fakty</Link>
+          <Link href="/historia">Historia Toru</Link>
           <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
           <Link href="/kontakt">Kontakt</Link>
           <Link href="/media">Dla mediów</Link>

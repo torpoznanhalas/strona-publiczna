@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { SupporterCounter } from "@/components/SupporterCounter";
 
 type PublicSupporter = {
   firstName: string;
@@ -71,7 +72,7 @@ export function SupporterActivity() {
       <div className="container supporter-activity-inner">
         <div className="supporter-activity-heading">
           <span className="supporter-activity-dot" aria-hidden="true" />
-          <span>Dołączają kolejni</span>
+          <span>Wspiera nas już <strong><SupporterCounter /></strong> osób!</span>
         </div>
 
         <div className="supporter-activity-window">

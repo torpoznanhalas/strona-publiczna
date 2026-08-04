@@ -2,15 +2,31 @@ import { videos } from "@/content/videos";
 
 export function VideoSection() {
   return (
-    <section className="section" id="nagrania">
+    <section className="section recordings-section" id="nagrania">
       <div className="container">
-        <div className="section-header">
-          <p className="eyebrow">Najpierw posłuchaj</p>
-          <h2 className="section-title">Tak brzmi „zwykły dzień” przy Torze Poznań.</h2>
-          <p className="section-lead">
-            Nagrania nie zastępują urzędowych pomiarów. Pokazują jednak to, czego nie oddaje
-            uśredniona liczba: charakter dźwięku, jego powtarzalność i czas trwania.
-          </p>
+        <div className="section-header recordings-header">
+          <h2 className="section-title recordings-title">
+            Tak słychać Tor Poznań w domach i ogrodach mieszkańców Ławicy, Bajkowego,
+            Przeźmierowa i Smochowic
+          </h2>
+          <div className="recordings-intro">
+            <p>
+              Włącz nagrania i wyobraź sobie, że tak brzmi praca z domu, odpoczynek w ogrodzie,
+              rozmowa przy otwartym oknie albo sen małego dziecka.
+            </p>
+            <p>
+              Nagrania nie są pomiarami akustycznymi i nie zastępują ustaleń właściwych organów.
+              Pokazują jednak coś, czego nie oddaje jedna uśredniona liczba: charakter dźwięku,
+              jego gwałtowność, powtarzalność i czas trwania.
+            </p>
+            <p>
+              Hałas nie jest wyłącznie kwestią komfortu. Światowa Organizacja Zdrowia wskazuje,
+              że nadmierna i długotrwała ekspozycja na hałas środowiskowy wiąże się między innymi
+              z zaburzeniami snu, skutkami dla układu krążenia i pogorszeniem funkcji poznawczych.
+              Dzieci należą do grup szczególnie wrażliwych, a chroniczny hałas może pogarszać
+              warunki nauki, koncentrację i szkolne funkcjonowanie.
+            </p>
+          </div>
         </div>
 
         {videos.length > 0 ? (
@@ -26,29 +42,13 @@ export function VideoSection() {
                     allowFullScreen
                   />
                 </div>
-                <div className="video-copy">
+                <div className="video-copy video-copy-title-only">
                   <h3>{video.title}</h3>
-                  <p>{video.description}</p>
-                  {(video.date || video.location) && (
-                    <p>
-                      {[video.date, video.location].filter(Boolean).join(" · ")}
-                    </p>
-                  )}
                 </div>
               </article>
             ))}
           </div>
-        ) : (
-          <div className="video-empty">
-            <div>
-              <strong>Miejsce na pierwsze nagrania.</strong>
-              <p>
-                Po otrzymaniu linków YouTube dodamy datę, miejsce i krótki opis warunków
-                nagrania. Filmy nie będą uruchamiały się automatycznie.
-              </p>
-            </div>
-          </div>
-        )}
+        ) : null}
       </div>
     </section>
   );

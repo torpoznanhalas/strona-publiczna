@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Tor Poznań: hałas, fakty i głos mieszkańców";
+export const alt = "Hałas z Toru Poznań — nagrania, fakty i apel mieszkańców";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -22,14 +22,14 @@ export default function Image() {
       >
         <div style={{ display: "flex", alignItems: "center", gap: "14px", fontSize: "26px", fontWeight: 800 }}>
           <span style={{ color: "#d52222" }}>●</span>
-          TOR POZNAŃ: HAŁAS
+          HAŁAS Z TORU POZNAŃ
         </div>
         <div style={{ display: "flex", flexDirection: "column", maxWidth: "1040px" }}>
           <div style={{ fontSize: "68px", fontWeight: 900, lineHeight: 1.05 }}>
-            Tor Poznań przekraczał normy.
+            Posłuchaj nagrań.
           </div>
           <div style={{ color: "#d52222", fontSize: "68px", fontWeight: 900, lineHeight: 1.05 }}>
-            Potem ruszyła walka o zmianę zasad.
+            Poznaj fakty. Poprzyj mieszkańców.
           </div>
         </div>
         <div style={{ fontSize: "24px" }}>torpoznanhalas.pl · nagrania · fakty · poparcie</div>

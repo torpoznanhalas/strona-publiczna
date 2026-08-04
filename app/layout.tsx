@@ -15,8 +15,8 @@ const barlow = Barlow({
 export const metadata: Metadata = {
   metadataBase: new URL("https://torpoznanhalas.pl"),
   title: {
-    default: "Tor Poznań: hałas, fakty i głos mieszkańców",
-    template: "%s | Tor Poznań: Hałas"
+    default: "Hałas z Toru Poznań — nagrania, fakty i apel mieszkańców",
+    template: "%s | Hałas z Toru Poznań"
   },
   description:
     "Nagrania i fakty dotyczące hałasu emitowanego przez Tor Poznań oraz działań podejmowanych po decyzji organów ochrony środowiska.",
@@ -35,15 +35,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pl_PL",
     url: "https://torpoznanhalas.pl",
-    siteName: "Tor Poznań: Hałas",
-    title: "Tor Poznań od lat przekracza normy hałasu. Mówimy STOP!",
+    siteName: "Hałas z Toru Poznań",
+    title: "Hałas z Toru Poznań — nagrania, fakty i apel mieszkańców",
     description:
-      "Poznaj fakty, posłuchaj nagrań i poprzyj egzekwowanie norm hałasu przy Torze Poznań."
+      "Posłuchaj nagrań, poznaj fakty i poprzyj apel mieszkańców o przestrzeganie norm hałasu."
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tor Poznań: hałas, fakty i głos mieszkańców",
-    description: "Posłuchaj nagrań. Zobacz mechanizm. Dodaj swój głos."
+    title: "Hałas z Toru Poznań — nagrania, fakty i apel mieszkańców",
+    description: "Posłuchaj nagrań, poznaj fakty i poprzyj mieszkańców."
   },
   alternates: {
     canonical: "/"
