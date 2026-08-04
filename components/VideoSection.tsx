@@ -6,12 +6,12 @@ export function VideoSection() {
       <div className="container">
         <div className="section-header recordings-header">
           <h2 className="section-title recordings-title">
-            Posłuchaj nagrań hałasu z Toru Poznań w domach i ogrodach na Ławicy, os. Bajkowym,
+            Posłuchaj nagrań hałasu z Toru Poznań wykonanych na Ławicy, os. Bajkowym,
             w Przeźmierowie i Smochowicach
           </h2>
           <div className="recordings-intro">
             <p>
-              Włącz nagrania i wyobraź sobie, że tak brzmi praca, odpoczynek, rozmowa przy otwartym
+              Tak brzmi praca, odpoczynek, rozmowa przy otwartym
               oknie albo sen małego dziecka — nie zastępują one pomiarów akustycznych, ale pokazują
               gwałtowność, powtarzalność i czas trwania hałasu. Długotrwała ekspozycja na hałas
               środowiskowy może zaburzać sen, wpływać na układ krążenia i pogarszać koncentrację,
