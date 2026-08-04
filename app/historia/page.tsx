@@ -12,7 +12,7 @@ export default function HistoryPage() {
       <section className="history-section" aria-labelledby="historia-toru">
         <div className="container">
           <div className="history-header">
-            <h2 id="historia-toru">TOR POZNAŃ: KTO BYŁ TU PIERWSZY?</h2>
+            <h2 id="historia-toru">Tor Poznań: kto był tu pierwszy?</h2>
             <p>Fakty, które warto znać, zanim Sejm zmieni prawo</p>
           </div>
           <div className="history-timeline">

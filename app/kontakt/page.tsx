@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Kontakt",
@@ -12,16 +11,13 @@ export default function ContactPage() {
     <>
       <section className="page-hero">
         <div className="container">
-          <h1>Pomóż nam opisać sprawę Toru Poznań precyzyjnie i uczciwie.</h1>
+          <h1>Skontaktuj się z nami</h1>
           <p className="page-hero-lead">
-            Przyjmujemy nagrania, pomiary, korespondencję i informacje o wydarzeniach na Torze Poznań.
-            Każde mocne twierdzenie powinno dać się sprawdzić w wiarygodnym źródle.
+            Spotykamy się z przedstawicielami prasy, przyjmujemy nagrania z okolicznych dzielnic,
+            wspieramy inne stowarzyszenia i mieszkańców Poznania w walce z hałasem!
           </p>
           <div className="button-row">
-            <Link className="button button-accent" href="/media">
-              Materiały dla mediów
-            </Link>
-            <a className="button button-ghost" href="mailto:halastorpoznan@gmail.com">
+            <a className="button button-accent" href="mailto:halastorpoznan@gmail.com">
               Napisz do nas
             </a>
           </div>
@@ -30,7 +26,7 @@ export default function ContactPage() {
 
       <section className="section">
         <div className="container">
-          <div className="prose">
+          <div className="prose" style={{ paddingTop: 0 }}>
             <h2>Stowarzyszenie Mieszkańców Ławica-Bajkowe</h2>
             <p>Numer w ewidencji stowarzyszeń zwykłych: 583</p>
             <p>

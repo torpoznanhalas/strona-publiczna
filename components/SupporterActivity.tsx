@@ -71,7 +71,6 @@ export function SupporterActivity() {
     <section className="supporter-activity" aria-label="Ostatnie osoby wspierające inicjatywę">
       <div className="container supporter-activity-inner">
         <div className="supporter-activity-heading">
-          <span className="supporter-activity-dot" aria-hidden="true" />
           <span>Wspiera nas już <strong><SupporterCounter /></strong> osób!</span>
         </div>
 

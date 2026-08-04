@@ -16,7 +16,6 @@ export function Footer() {
           <Link href="/historia">Historia Toru</Link>
           <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
           <Link href="/kontakt">Kontakt</Link>
-          <Link href="/media">Dla mediów</Link>
         </div>
       </div>
     </footer>

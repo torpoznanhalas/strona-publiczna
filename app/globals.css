@@ -1926,3 +1926,214 @@ h6,
     font-size: 0.86rem;
   }
 }
+
+/* v12 — uproszczenie nawigacji, spójna historia i uporządkowana sekcja poparcia */
+
+.supporter-activity-inner {
+  grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
+}
+
+.supporter-activity-heading {
+  display: block;
+  font-size: clamp(1.08rem, 1.55vw, 1.34rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.supporter-activity-heading strong {
+  color: var(--accent);
+  font-size: 1.35em;
+  line-height: 1;
+}
+
+.support-section-header {
+  max-width: none;
+  margin-bottom: 40px;
+}
+
+.support-section-header .section-title {
+  max-width: 1120px;
+}
+
+.support-cards-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 30px;
+  align-items: stretch;
+}
+
+.support-cards-grid > .form,
+.support-cards-grid > .supporter-directory {
+  height: 100%;
+  min-height: 690px;
+  margin-top: 0;
+}
+
+.support-cards-grid > .form {
+  align-content: start;
+  border: 1px solid var(--line);
+}
+
+.support-cards-grid > .supporter-directory {
+  display: flex;
+  flex-direction: column;
+}
+
+.support-cards-grid .supporter-directory-header {
+  color: white;
+  border-bottom: 0;
+  background: var(--accent);
+}
+
+.support-cards-grid .supporter-directory-eyebrow,
+.support-cards-grid .supporter-directory-header h3,
+.support-cards-grid .supporter-directory-count {
+  color: white;
+}
+
+.support-cards-grid .supporter-directory-eyebrow {
+  opacity: 0.78;
+}
+
+.support-cards-grid .supporter-directory-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+}
+
+/* Historia Toru: ta sama paleta i rytm wizualny co na stronie głównej */
+.history-section {
+  padding: 92px 0 110px;
+  border-top: 0;
+  background: var(--background);
+}
+
+.history-header {
+  max-width: 980px;
+  margin: 0 0 70px;
+  padding: 0;
+  color: var(--text);
+  background: transparent;
+}
+
+.history-header h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(2.35rem, 5vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.04;
+  text-transform: none;
+}
+
+.history-header p {
+  max-width: 760px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: clamp(1.08rem, 1.7vw, 1.32rem);
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.history-timeline::before {
+  background: var(--text);
+}
+
+.history-dot-blue {
+  background: var(--text);
+}
+
+.history-dot-red {
+  background: var(--accent);
+}
+
+.history-point h3 {
+  color: var(--text);
+}
+
+.history-point-alert h3 {
+  color: var(--accent);
+}
+
+.history-conclusion {
+  margin-top: 58px;
+  padding: 30px;
+  border: 0;
+  border-top: 6px solid var(--accent);
+  border-radius: 0;
+  color: white;
+  background: var(--dark);
+}
+
+.history-conclusion span {
+  color: var(--dark-muted);
+}
+
+.history-sources {
+  color: var(--muted);
+}
+
+@media (max-width: 1000px) {
+  .support-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .support-cards-grid > .form,
+  .support-cards-grid > .supporter-directory {
+    min-height: 0;
+  }
+
+  .support-cards-grid > .supporter-directory {
+    min-height: 560px;
+  }
+
+  .history-point {
+    border-top-color: var(--text);
+  }
+
+  .history-point-alert {
+    border-top-color: var(--accent);
+  }
+}
+
+@media (max-width: 760px) {
+  .supporter-activity-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .supporter-activity-heading {
+    font-size: 1.12rem;
+  }
+
+  .support-section-header {
+    margin-bottom: 28px;
+  }
+
+  .support-cards-grid {
+    gap: 22px;
+  }
+
+  .support-cards-grid > .supporter-directory {
+    min-height: 520px;
+  }
+
+  .history-section {
+    padding: 58px 0 78px;
+  }
+
+  .history-header {
+    margin-bottom: 54px;
+    padding: 0;
+  }
+
+  .history-header h2 {
+    font-size: clamp(2.1rem, 10vw, 3rem);
+  }
+
+  .history-header p {
+    font-size: 1.05rem;
+  }
+
+  .history-timeline::before {
+    background: var(--text);
+  }
+}

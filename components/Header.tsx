@@ -47,9 +47,6 @@ export function Header() {
           <Link href="/historia" onClick={closeMenu}>
             Historia Toru
           </Link>
-          <Link href="/media" onClick={closeMenu}>
-            Dla mediów
-          </Link>
           <Link href="/kontakt" onClick={closeMenu}>
             Kontakt
           </Link>

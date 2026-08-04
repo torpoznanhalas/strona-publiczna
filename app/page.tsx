@@ -1,4 +1,3 @@
-import { SupporterCounter } from "@/components/SupporterCounter";
 import { SupporterActivity } from "@/components/SupporterActivity";
 import { SupporterDirectory } from "@/components/SupporterDirectory";
 import { SupportForm } from "@/components/SupportForm";
@@ -68,23 +67,17 @@ export default function Home() {
 
       <VideoSection />
 
-      <section className="section" id="poparcie">
-        <div className="container support-layout">
-          <div>
+      <section className="section support-section" id="poparcie">
+        <div className="container">
+          <div className="support-section-header">
             <h2 className="section-title">
               Wyraź poparcie dla przestrzegania norm hałasu przez Tor Poznań.
             </h2>
-            <SupporterCounter large />
-            <p className="section-lead">
-              zweryfikowanych osób popiera egzekwowanie norm hałasu oraz przejrzyste zasady działania
-              Toru Poznań.
-            </p>
-            <p className="section-lead">
-              Licznik pokazuje tylko wpisy zatwierdzone po weryfikacji. Dane kontaktowe nie są publiczne.
-            </p>
+          </div>
+          <div className="support-cards-grid">
+            <SupportForm />
             <SupporterDirectory />
           </div>
-          <SupportForm />
         </div>
       </section>
 
