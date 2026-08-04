@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SupporterCounter } from "@/components/SupporterCounter";
 import { SupporterActivity } from "@/components/SupporterActivity";
+import { SupporterDirectory } from "@/components/SupporterDirectory";
 import { SupportForm } from "@/components/SupportForm";
 import { VideoSection } from "@/components/VideoSection";
 
@@ -86,6 +87,7 @@ export default function Home() {
             <p className="section-lead">
               Licznik pokazuje tylko wpisy zatwierdzone po weryfikacji. Dane kontaktowe nie są publiczne.
             </p>
+            <SupporterDirectory />
           </div>
           <SupportForm />
         </div>

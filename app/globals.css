@@ -1503,3 +1503,238 @@ h6,
     border-left: 0;
   }
 }
+
+
+/* Public supporter carousel and directory — v9 */
+
+.support-layout {
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+  gap: 56px;
+}
+
+.supporter-activity-inner {
+  grid-template-columns: 178px minmax(0, 1fr);
+}
+
+.supporter-activity-window {
+  max-width: none;
+  overflow: hidden;
+}
+
+.supporter-activity-scroller {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+
+.supporter-activity-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.supporter-activity-list {
+  width: max-content;
+  grid-auto-columns: 225px;
+}
+
+.supporter-activity-item {
+  scroll-snap-align: start;
+}
+
+.supporter-activity-place {
+  overflow: hidden;
+  color: #403d38;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.supporter-activity-placeholder-medium {
+  width: 96px;
+  height: 8px;
+}
+
+.supporter-directory {
+  margin-top: 34px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.supporter-directory-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: end;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.supporter-directory-eyebrow {
+  margin: 0 0 4px;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.supporter-directory-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+
+.supporter-directory-count {
+  color: var(--accent);
+  font-size: 2.3rem;
+  font-weight: 800;
+  line-height: 0.9;
+}
+
+.supporter-directory-scroll {
+  position: relative;
+  max-height: 430px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  outline: none;
+  scrollbar-color: #bdb6aa transparent;
+  scrollbar-width: thin;
+}
+
+.supporter-directory-scroll:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.supporter-directory-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.supporter-directory-row {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.8fr) minmax(140px, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  min-height: 62px;
+  padding: 13px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.supporter-directory-row strong {
+  font-size: 0.98rem;
+}
+
+.supporter-directory-row span {
+  overflow: hidden;
+  color: #403d38;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.supporter-directory-row time {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.supporter-directory-message {
+  margin: 0;
+  padding: 18px 24px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.supporter-directory-error {
+  color: #8d1010;
+}
+
+.supporter-directory-more {
+  width: 100%;
+  padding: 15px 24px;
+  border: 0;
+  border-top: 1px solid var(--line);
+  color: var(--text);
+  background: white;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.supporter-directory-more:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 1000px) {
+  .support-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .supporter-directory {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 760px) {
+  .supporter-activity-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .supporter-activity-window {
+    max-height: none;
+  }
+
+  .supporter-activity-window::after {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: 82px;
+    height: auto;
+    background: linear-gradient(90deg, rgba(255, 253, 248, 0), var(--surface) 92%);
+  }
+
+  .supporter-activity-list {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(190px, 64vw);
+  }
+
+  .supporter-activity-item {
+    min-height: 76px;
+    padding: 10px 18px;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+
+  .supporter-directory-header {
+    padding: 20px;
+  }
+
+  .supporter-directory-row {
+    grid-template-columns: 1fr auto;
+    gap: 4px 14px;
+    padding: 13px 20px;
+  }
+
+  .supporter-directory-row strong {
+    grid-column: 1;
+  }
+
+  .supporter-directory-row span {
+    grid-column: 1;
+    white-space: normal;
+  }
+
+  .supporter-directory-row time {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+}

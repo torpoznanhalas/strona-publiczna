@@ -12,8 +12,8 @@ export default function PrivacyPage() {
           <p className="eyebrow">Dane osobowe</p>
           <h1>Polityka prywatności.</h1>
           <p className="section-lead">
-            Wersja robocza z 3 sierpnia 2026 r. Przed publicznym uruchomieniem formularza dokument
-            powinien zostać zatwierdzony przez osobę odpowiedzialną za ochronę danych w Stowarzyszeniu.
+            Wersja z 4 sierpnia 2026 r. Zakres publicznie prezentowanych danych zależy od zgody
+            zaznaczonej w formularzu poparcia.
           </p>
         </div>
       </section>
@@ -47,10 +47,11 @@ export default function PrivacyPage() {
 
           <h2>4. Co jest widoczne publicznie</h2>
           <p>
-            Publicznie może zostać pokazane wyłącznie imię, pierwsza litera nazwiska i miejscowość,
-            i tylko wtedy, gdy osoba zaznaczy odpowiednią zgodę. E-mail, kod pocztowy i dane techniczne
-            nie są publikowane. Licznik może uwzględniać także osoby, które nie zgodziły się na
-            pokazanie swojego zanonimizowanego wpisu.
+            Publicznie może zostać pokazane imię, pierwsza litera nazwiska, miejscowość, pełny kod
+            pocztowy — jeżeli został podany — oraz data dołączenia, i tylko wtedy, gdy osoba zaznaczy
+            odpowiednią zgodę. Adres e-mail i dane techniczne nie są publikowane. Licznik może
+            uwzględniać także osoby, które nie zgodziły się na pokazanie swojego wpisu. W przypadku
+            zgłoszeń przesłanych przed rozszerzeniem treści zgody kod pocztowy pozostaje niepubliczny.
           </p>
 
           <h2>5. Odbiorcy i dostawcy techniczni</h2>

@@ -35,3 +35,11 @@ Nowe wpisy otrzymują status `pending`. Licznik obejmuje wyłącznie wpisy ze st
 2. Skonfiguruj ochronę formularza przed botami.
 3. Uzupełnij NIP i REGON po ich nadaniu.
 4. Każde oskarżenie personalne lub dotyczące bezprawności oprzyj na wiarygodnym źródle.
+
+
+## Publiczna lista poparcia
+
+Pasek pod nagłówkiem i przewijana lista przy formularzu korzystają z endpointu
+`/api/supporters`. Pokazują tylko zatwierdzone wpisy z włączoną zgodą na publiczną prezentację.
+Nowe zgłoszenia zapisują wersję zgody `2026-08-04-v2`, która obejmuje pełny kod pocztowy,
+jeżeli osoba go podała.

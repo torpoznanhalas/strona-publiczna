@@ -29,3 +29,13 @@ Po otrzymaniu wiadomości z adresu e-mail użytego w formularzu:
 - Każda osoba używa własnego konta i uwierzytelniania dwuskładnikowego.
 - Klucz serwerowy Supabase pozostaje wyłącznie w zmiennych środowiskowych Netlify.
 - Nie publikuj adresów e-mail, kodów pocztowych, adresów IP ani notatek moderatora.
+
+
+## Publiczna lista osób wspierających
+
+Publiczna lista i pasek pod nagłówkiem pokazują wyłącznie wpisy ze statusem `approved`
+oraz z `public_display_consent = true`.
+
+Dla zgłoszeń zapisanych z wersją zgody `2026-08-04-v2` publicznie mogą być pokazane:
+imię, pierwsza litera nazwiska, miejscowość, pełny kod pocztowy (jeżeli podany) i data dołączenia.
+Starsze zgłoszenia są wyświetlane bez kodu pocztowego.

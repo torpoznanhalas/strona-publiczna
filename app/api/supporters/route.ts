@@ -6,6 +6,8 @@ import { parseSupporterPayload } from "@/lib/validation";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+const PUBLIC_POSTAL_CODE_PRIVACY_VERSION = "2026-08-04-v2";
+
 function getClientIp(request: Request) {
   const forwarded = request.headers.get("x-forwarded-for");
   return forwarded?.split(",")[0]?.trim() || request.headers.get("x-real-ip") || "unknown";
@@ -56,12 +58,20 @@ async function getCount(query: string) {
 type PublicSupporterRow = {
   first_name?: unknown;
   last_initial?: unknown;
+  city?: unknown;
+  postal_code?: unknown;
   created_at?: unknown;
+  privacy_version?: unknown;
 };
 
-async function getLatestPublicSupporters() {
+function parsePositiveInteger(value: string | null, fallback: number) {
+  const parsed = Number.parseInt(value ?? "", 10);
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
+}
+
+async function getPublicSupporters(limit: number, offset: number) {
   const response = await supabaseAdminFetch(
-    "/supporters?select=first_name,last_initial,created_at&status=eq.approved&public_display_consent=eq.true&order=created_at.desc&limit=3",
+    `/supporters?select=first_name,last_initial,city,postal_code,created_at,privacy_version&status=eq.approved&public_display_consent=eq.true&order=created_at.desc&offset=${offset}&limit=${limit}`,
     { method: "GET" }
   );
 
@@ -72,31 +82,71 @@ async function getLatestPublicSupporters() {
   const rows = (await response.json()) as PublicSupporterRow[];
 
   return rows
-    .map((row) => ({
-      firstName: String(row.first_name ?? "").trim().slice(0, 80),
-      lastInitial: String(row.last_initial ?? "").trim().slice(0, 1).toUpperCase(),
-      createdAt: String(row.created_at ?? "")
-    }))
-    .filter((row) => row.firstName.length >= 2 && row.lastInitial.length === 1 && row.createdAt);
+    .map((row) => {
+      const privacyVersion = String(row.privacy_version ?? "");
+      const canShowPostalCode =
+        privacyVersion === PUBLIC_POSTAL_CODE_PRIVACY_VERSION;
+
+      return {
+        firstName: String(row.first_name ?? "").trim().slice(0, 80),
+        lastInitial: String(row.last_initial ?? "").trim().slice(0, 1).toUpperCase(),
+        city: String(row.city ?? "").trim().slice(0, 100),
+        postalCode: canShowPostalCode
+          ? String(row.postal_code ?? "").trim().slice(0, 6)
+          : "",
+        createdAt: String(row.created_at ?? "")
+      };
+    })
+    .filter(
+      (row) =>
+        row.firstName.length >= 2 &&
+        row.lastInitial.length === 1 &&
+        row.city.length >= 2 &&
+        row.createdAt
+    );
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const requestUrl = new URL(request.url);
+    const limit = Math.min(
+      Math.max(parsePositiveInteger(requestUrl.searchParams.get("limit"), 8), 1),
+      100
+    );
+    const offset = parsePositiveInteger(requestUrl.searchParams.get("offset"), 0);
+
     const count = await getCount("status=eq.approved");
-    let supporters: Awaited<ReturnType<typeof getLatestPublicSupporters>> = [];
+    const publicCount = await getCount(
+      "status=eq.approved&public_display_consent=eq.true"
+    );
+
+    let supporters: Awaited<ReturnType<typeof getPublicSupporters>> = [];
 
     try {
-      supporters = await getLatestPublicSupporters();
+      supporters = await getPublicSupporters(limit, offset);
     } catch {
       // Awaria listy publicznej nie może wyzerować działającego licznika.
     }
 
     return NextResponse.json(
-      { count, supporters },
+      {
+        count,
+        publicCount,
+        supporters,
+        hasMore: offset + supporters.length < publicCount
+      },
       { headers: { "Cache-Control": "no-store, max-age=0" } }
     );
   } catch {
-    return NextResponse.json({ count: 0, supporters: [] }, { status: 200 });
+    return NextResponse.json(
+      {
+        count: 0,
+        publicCount: 0,
+        supporters: [],
+        hasMore: false
+      },
+      { status: 200 }
+    );
   }
 }
 
@@ -143,7 +193,7 @@ export async function POST(request: Request) {
         email: payload.email,
         adult_confirmed: payload.adult,
         public_display_consent: payload.publicDisplay,
-        privacy_version: "2026-08-03-v1",
+        privacy_version: PUBLIC_POSTAL_CODE_PRIVACY_VERSION,
         status: "pending",
         ip_hash: ipHash,
         user_agent: request.headers.get("user-agent")?.slice(0, 500) || null

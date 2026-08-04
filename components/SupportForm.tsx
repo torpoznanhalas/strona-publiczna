@@ -170,7 +170,8 @@ export function SupportForm() {
         />
         <span>
           Zgadzam się na publiczne pokazanie zapisu w formie: imię, pierwsza litera nazwiska,
-          miejscowość i data dołączenia. Adres e-mail i kod pocztowy pozostaną niepubliczne.
+          miejscowość, pełny kod pocztowy — jeśli został podany — oraz data dołączenia.
+          Adres e-mail pozostanie niepubliczny.
         </span>
       </label>
 

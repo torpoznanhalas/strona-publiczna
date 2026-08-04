@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 type PublicSupporter = {
   firstName: string;
   lastInitial: string;
+  city: string;
+  postalCode: string;
   createdAt: string;
 };
 
@@ -19,6 +21,12 @@ const dateFormatter = new Intl.DateTimeFormat("pl-PL", {
   timeZone: "Europe/Warsaw"
 });
 
+function formatPlace(supporter: PublicSupporter) {
+  return supporter.postalCode
+    ? `${supporter.city}, ${supporter.postalCode}`
+    : supporter.city;
+}
+
 export function SupporterActivity() {
   const [supporters, setSupporters] = useState<PublicSupporter[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -28,12 +36,14 @@ export function SupporterActivity() {
 
     const load = async () => {
       try {
-        const response = await fetch("/api/supporters", { cache: "no-store" });
+        const response = await fetch("/api/supporters?limit=8&offset=0", {
+          cache: "no-store"
+        });
         if (!response.ok) return;
 
         const data = (await response.json()) as SupportersResponse;
         if (active) {
-          setSupporters(Array.isArray(data.supporters) ? data.supporters.slice(0, 3) : []);
+          setSupporters(Array.isArray(data.supporters) ? data.supporters : []);
           setLoaded(true);
         }
       } catch {
@@ -54,6 +64,8 @@ export function SupporterActivity() {
     return null;
   }
 
+  const visibleItems = supporters.length > 0 ? supporters : [null, null, null, null, null];
+
   return (
     <section className="supporter-activity" aria-label="Ostatnie osoby wspierające inicjatywę">
       <div className="container supporter-activity-inner">
@@ -62,24 +74,39 @@ export function SupporterActivity() {
           <span>Dołączają kolejni</span>
         </div>
 
-        <div className="supporter-activity-window" aria-live="polite">
-          <ol className="supporter-activity-list">
-            {(supporters.length > 0 ? supporters : [null, null, null]).map((supporter, index) => (
-              <li className={supporter ? "supporter-activity-item" : "supporter-activity-item is-loading"} key={supporter ? `${supporter.firstName}-${supporter.lastInitial}-${supporter.createdAt}` : `loading-${index}`}>
-                {supporter ? (
-                  <>
-                    <strong>{supporter.firstName} {supporter.lastInitial}.</strong>
-                    <time dateTime={supporter.createdAt}>{dateFormatter.format(new Date(supporter.createdAt))}</time>
-                  </>
-                ) : (
-                  <>
-                    <span className="supporter-activity-placeholder" />
-                    <span className="supporter-activity-placeholder supporter-activity-placeholder-short" />
-                  </>
-                )}
-              </li>
-            ))}
-          </ol>
+        <div className="supporter-activity-window">
+          <div className="supporter-activity-scroller" aria-live="polite">
+            <ol className="supporter-activity-list">
+              {visibleItems.map((supporter, index) => (
+                <li
+                  className={supporter ? "supporter-activity-item" : "supporter-activity-item is-loading"}
+                  key={
+                    supporter
+                      ? `${supporter.firstName}-${supporter.lastInitial}-${supporter.createdAt}`
+                      : `loading-${index}`
+                  }
+                >
+                  {supporter ? (
+                    <>
+                      <strong>
+                        {supporter.firstName} {supporter.lastInitial}.
+                      </strong>
+                      <span className="supporter-activity-place">{formatPlace(supporter)}</span>
+                      <time dateTime={supporter.createdAt}>
+                        {dateFormatter.format(new Date(supporter.createdAt))}
+                      </time>
+                    </>
+                  ) : (
+                    <>
+                      <span className="supporter-activity-placeholder" />
+                      <span className="supporter-activity-placeholder supporter-activity-placeholder-medium" />
+                      <span className="supporter-activity-placeholder supporter-activity-placeholder-short" />
+                    </>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </section>
