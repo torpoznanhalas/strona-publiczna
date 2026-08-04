@@ -40,14 +40,14 @@ export default function Home() {
           <div className="hero-main">
             <p className="eyebrow">Tor Poznań · hałas · fakty</p>
             <h1>
-              Tor Poznań <em>od lat przekracza normy hałasu</em>, szkodząc zdrowiu tysięcy
-              Poznaniaków. A teraz próbuje zmienić prawo. <em>Mówimy STOP!</em>
+              Tor Poznań od lat przekracza normy hałasu, szkodząc zdrowiu tysięcy Poznaniaków.{" "}
+              <span className="hero-highlight">A teraz próbuje zmienić prawo.</span>
             </h1>
             <p className="hero-description">
               Gdy Główny Inspektor Ochrony Środowiska utrzymał decyzję o wstrzymaniu użytkowania
-              Toru Poznań z powodu przekroczeń hałasu, uruchomiono odwołanie, rozmowy o podniesieniu
-              dopuszczalnych poziomów i projekt zmiany ustawy. Do rozmów nie zaproszono mieszkańców.
-              <strong>Dlatego pokazujemy fakty.</strong>
+              Toru Poznań z powodu przekroczeń hałasu trwających <strong>LATAMI</strong>, uruchomiono
+              odwołanie, rozmowy o podniesieniu limitów hałasu i projekt zmiany ustawy. Do rozmów
+              <strong> NIE</strong> zaproszono mieszkańców. <strong>Dlatego mówimy STOP!</strong>
             </p>
             <div className="button-row hero-buttons">
               <a className="button button-accent" href="#mechanizm">
