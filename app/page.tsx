@@ -41,6 +41,11 @@ export default function Home() {
             <h1>
               Tor Poznań przekraczał normy. Potem ruszyła walka o <strong>zmianę zasad.</strong>
             </h1>
+            <p className="hero-description">
+              Gdy organ ochrony środowiska utrzymał decyzję o wstrzymaniu użytkowania instalacji
+              na Torze Poznań z powodu przekroczeń hałasu, uruchomiono odwołanie, rozmowy o
+              podniesieniu dopuszczalnych poziomów i projekt zmiany ustawy. <strong>Pokazujemy mechanizm.</strong>
+            </p>
             <div className="button-row hero-buttons">
               <a className="button button-accent" href="#mechanizm">
                 Zobacz mechanizm
@@ -49,23 +54,39 @@ export default function Home() {
                 Posłuchaj hałasu
               </a>
             </div>
-            <Link className="hero-support-counter" href="#poparcie">
+          </div>
+          <aside className="hero-aside">
+            <Link className="hero-support-counter hero-support-counter-aside" href="#poparcie">
               <span className="hero-support-number"><SupporterCounter /></span>
               <span className="hero-support-label">
                 zweryfikowanych osób popiera egzekwowanie norm hałasu przy Torze Poznań
               </span>
             </Link>
-          </div>
-          <aside className="hero-aside">
-            <p>
-              Gdy organ ochrony środowiska utrzymał decyzję o wstrzymaniu użytkowania instalacji
-              na Torze Poznań z powodu przekroczeń hałasu, uruchomiono odwołanie, rozmowy o
-              podniesieniu dopuszczalnych poziomów i projekt zmiany ustawy. <strong>Pokazujemy mechanizm.</strong>
-            </p>
           </aside>
         </div>
       </section>
 
+
+
+      <VideoSection />
+
+      <section className="section" id="poparcie">
+        <div className="container support-layout">
+          <div>
+            <p className="eyebrow">Społeczny mandat</p>
+            <h2 className="section-title">Prawo ma chronić ludzi, nie wygodę operatora Toru Poznań.</h2>
+            <SupporterCounter large />
+            <p className="section-lead">
+              zweryfikowanych osób popiera egzekwowanie norm hałasu oraz przejrzyste zasady działania
+              Toru Poznań.
+            </p>
+            <p className="section-lead">
+              Licznik pokazuje tylko wpisy zatwierdzone po weryfikacji. Dane kontaktowe nie są publiczne.
+            </p>
+          </div>
+          <SupportForm />
+        </div>
+      </section>
 
 
       <section className="section" id="mechanizm">
@@ -344,25 +365,6 @@ export default function Home() {
         </div>
       </section>
 
-      <VideoSection />
-
-      <section className="section" id="poparcie">
-        <div className="container support-layout">
-          <div>
-            <p className="eyebrow">Społeczny mandat</p>
-            <h2 className="section-title">Prawo ma chronić ludzi, nie wygodę operatora Toru Poznań.</h2>
-            <SupporterCounter large />
-            <p className="section-lead">
-              zweryfikowanych osób popiera egzekwowanie norm hałasu oraz przejrzyste zasady działania
-              Toru Poznań.
-            </p>
-            <p className="section-lead">
-              Licznik pokazuje tylko wpisy zatwierdzone po weryfikacji. Dane kontaktowe nie są publiczne.
-            </p>
-          </div>
-          <SupportForm />
-        </div>
-      </section>
 
 
       <section className="section section-dark">

@@ -1266,3 +1266,92 @@ h6,
     padding: 28px 24px;
   }
 }
+
+/* Hero hierarchy and placement of recordings — v6 */
+.hero-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 290px);
+  gap: clamp(38px, 5vw, 76px);
+  align-items: center;
+}
+
+.hero-description {
+  max-width: 980px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: clamp(1.02rem, 1.45vw, 1.2rem);
+  line-height: 1.55;
+}
+
+.hero-description strong {
+  color: var(--text);
+}
+
+.hero-aside {
+  align-self: center;
+  padding: 0;
+}
+
+.hero-support-counter-aside {
+  grid-template-columns: 1fr;
+  align-content: center;
+  gap: 16px;
+  min-height: 260px;
+  width: 100%;
+  max-width: 290px;
+  margin-top: 0;
+  padding: 32px 28px;
+}
+
+.hero-support-counter-aside .hero-support-number {
+  font-size: clamp(4.6rem, 7vw, 6.8rem);
+}
+
+.hero-support-counter-aside .hero-support-label {
+  max-width: 19ch;
+  font-size: 1.03rem;
+  line-height: 1.28;
+}
+
+@media (max-width: 1000px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(210px, 250px);
+    gap: 32px;
+  }
+
+  .hero-support-counter-aside {
+    min-height: 230px;
+    max-width: 250px;
+    padding: 26px 22px;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-description {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+
+  .hero-aside {
+    width: 100%;
+  }
+
+  .hero-support-counter-aside {
+    grid-template-columns: auto minmax(0, 1fr);
+    min-height: 0;
+    max-width: none;
+    gap: 18px;
+    padding: 20px;
+  }
+
+  .hero-support-counter-aside .hero-support-number {
+    font-size: clamp(3.6rem, 18vw, 5.2rem);
+  }
+
+  .hero-support-counter-aside .hero-support-label {
+    max-width: 24ch;
+  }
+}
