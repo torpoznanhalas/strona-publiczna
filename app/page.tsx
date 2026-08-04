@@ -85,11 +85,11 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">
-              Żądamy zasad, których nie można wyłączyć politycznym wyjątkiem.
+              Żądamy przestrzegania praw mieszkańców Ławicy, os. Bajkowego, Przeźmierowa i Smochowic do ciszy i wypoczynku.
             </h2>
             <p className="section-lead">
-              Tor Poznań może działać tylko wtedy, gdy jego działalność jest przewidywalna, kontrolowana
-              i nie przerzuca kosztów komercyjnych wydarzeń na tysiące osób mieszkających wokół.
+              Tor Poznań może działać tylko wtedy, gdy jego działalność jest ściśle kontrolowana, zaplanowana,
+              i nie szkodzi zdrowiu tysięcy dorosłych i dzieci mieszkających wokół.
             </p>
           </div>
 
