@@ -7,27 +7,27 @@ const demands = [
   {
     title: "Stały i niezależny monitoring",
     description:
-      "Pomiary prowadzone przez niezależny system oraz publiczny raport po każdym dniu działalności Toru Poznań."
+      "Pomiary natężenia hałasu w okolicznych dzielnicach prowadzone przez niezależny system, dostępne publicznie w czasie rzeczywistym."
   },
   {
     title: "Kontrola każdego pojazdu",
     description:
-      "Pomiar głośności przed wjazdem na Tor Poznań i bezwzględne niedopuszczanie pojazdów przekraczających limit."
+      "Pomiar głośności w trakcie trwania wyścigów i zawodów, oraz bezwzględne wykluczanie z nich pojazdów przekraczających limit."
   },
   {
-    title: "Limit szczególnie głośnych dni",
+    title: "Harmonogram i limity wyścigów",
     description:
-      "Roczny limit najbardziej uciążliwych wydarzeń oraz harmonogram ogłaszany mieszkańcom z dużym wyprzedzeniem."
+      "Wyścigi i zawody wyłącznie w dni robocze, w godzinach 8.00-16.00. Nie więcej niż 20 dni w ciągu roku. "
   },
   {
-    title: "Ochrona dni roboczych",
+    title: "Bezwzględna ochrona weekendów",
     description:
-      "Zakaz wielogodzinnych, głośnych imprez komercyjnych w dni robocze bez skutecznych ograniczeń emisji."
+      "Zakaz wyścigów i zawodów na torze w weekendy - jedyne dni odpoczynku dla tysięcy okolicznych rodzin."
   },
   {
     title: "Równy głos mieszkańców",
     description:
-      "Stały zespół konsultacyjny z równą reprezentacją mieszkańców, samorządów, ekspertów i operatora Toru Poznań."
+      "Stały zespół konsultacyjny z równą reprezentacją mieszkańców, samorządów i władz Automobilklubu Wielkopolskiego."
   }
 ];
 
@@ -85,7 +85,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">
-              Żądamy przestrzegania praw mieszkańców Ławicy, os. Bajkowego, Przeźmierowa i Smochowic do ciszy i wypoczynku.
+              Żądamy przestrzegania praw do ciszy i wypoczynku, mieszkańców Ławicy, os. Bajkowego, Przeźmierowa i Smochowic.
             </h2>
             <p className="section-lead">
               Tor Poznań może działać tylko wtedy, gdy jego działalność jest ściśle kontrolowana, zaplanowana,
