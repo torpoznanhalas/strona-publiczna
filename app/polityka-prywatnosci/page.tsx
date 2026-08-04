@@ -23,8 +23,8 @@ export default function PrivacyPage() {
           <h2>1. Administrator danych</h2>
           <p>
             Administratorem danych osobowych jest Stowarzyszenie Mieszkańców Ławica-Bajkowe,
-            ul. Juliana Tuwima 64, 60-195 Poznań, numer w ewidencji 583. Kontakt w sprawach danych
-            osobowych: <a href="mailto:halastorpoznan@gmail.com">halastorpoznan@gmail.com</a>.
+            numer w ewidencji 583. Kontakt w sprawach danych osobowych:
+            <a href="mailto:halastorpoznan@gmail.com"> halastorpoznan@gmail.com</a>.
           </p>
 
           <h2>2. Jakie dane zbieramy</h2>

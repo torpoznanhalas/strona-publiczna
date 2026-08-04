@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container footer-grid">
         <div>
           <p className="footer-title">Stowarzyszenie Mieszkańców Ławica-Bajkowe</p>
-          <p>ul. Juliana Tuwima 64, 60-195 Poznań · nr w ewidencji 583</p>
+          <p>Stowarzyszenie zwykłe · nr w ewidencji 583</p>
           <p>
             Kontakt: <a href="mailto:halastorpoznan@gmail.com">halastorpoznan@gmail.com</a>
           </p>

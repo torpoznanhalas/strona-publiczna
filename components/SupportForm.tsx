@@ -175,9 +175,8 @@ export function SupportForm() {
       </label>
 
       <p className="form-note">
-        Administratorem danych jest Stowarzyszenie Mieszkańców Ławica-Bajkowe, ul. Juliana
-        Tuwima 64, 60-195 Poznań, nr w ewidencji 583. Poparcie można wycofać, pisząc na
-        halastorpoznan@gmail.com.
+        Administratorem danych jest Stowarzyszenie Mieszkańców Ławica-Bajkowe, nr w ewidencji
+        583. Poparcie można wycofać, pisząc na halastorpoznan@gmail.com.
       </p>
 
       {status === "success" && <p className="form-status success">{message}</p>}

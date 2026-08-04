@@ -16,11 +16,7 @@ export default function ContactPage() {
       <div className="container">
         <div className="prose">
           <h2>Stowarzyszenie Mieszkańców Ławica-Bajkowe</h2>
-          <p>
-            ul. Juliana Tuwima 64<br />
-            60-195 Poznań<br />
-            numer w ewidencji: 583
-          </p>
+          <p>Numer w ewidencji stowarzyszeń zwykłych: 583</p>
           <p>
             E-mail: <a href="mailto:halastorpoznan@gmail.com">halastorpoznan@gmail.com</a>
           </p>

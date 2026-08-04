@@ -30,7 +30,7 @@ export function Header() {
         </button>
 
         <nav id="main-navigation" className={`nav${open ? " nav-open" : ""}`} aria-label="Główna nawigacja">
-          <Link href="/#fakty" onClick={closeMenu}>Fakty</Link>
+          <Link href="/#mechanizm" onClick={closeMenu}>Fakty</Link>
           <Link href="/#nagrania" onClick={closeMenu}>Nagrania</Link>
           <Link href="/media" onClick={closeMenu}>Dla mediów</Link>
           <Link href="/#poparcie" onClick={closeMenu}>Poprzyj</Link>
