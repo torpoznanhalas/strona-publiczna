@@ -45,11 +45,11 @@ export default function Home() {
             </h1>
             <p className="hero-description">
               Główny Inspektor Ochrony Środowiska potwierdził przekroczenia dopuszczalnych poziomów
-              hałasu i utrzymał decyzję o wstrzymaniu użytkowania Toru Poznań.
+              hałasu przez Tor Poznań i utrzymał decyzję o wstrzymaniu jego użytkowania.
               Wykonanie decyzji zostało jednak wstrzymane, a w Sejmie procedowany jest projekt
-              próbujący wyjąc tory wyścigowe spod prawa i norm hałasu. Nie żądamy
-              likwidacji Toru Poznań. Żądamy przestrzegania prawa, zbudowania ekranów akustycznych, 
-              ograniczenia jazd komercyjnych i godzin ich trwania, oraz zaproszenia mieszkańców do podejmowania decyzji.
+              próbujący wyłączyć tory wyścigowe z norm hałasu. Nie żądamy likwidacji Toru Poznań.
+              Żądamy przestrzegania prawa, profesjonalnego wyciszenia toru,
+              ograniczenia dni i godzin hałaśliwych jazd, oraz uwzględnienia mieszkańców w decyzjach.
             </p>
             <div className="button-row hero-buttons">
               <a className="button button-accent" href="#nagrania">
