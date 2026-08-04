@@ -36,19 +36,12 @@ export default function Home() {
     <>
       <section className="hero">
         <div className="container hero-grid">
-          <div>
+          <div className="hero-main">
             <p className="eyebrow">Tor Poznań · hałas · fakty</p>
             <h1>
               Tor Poznań przekraczał normy. Potem ruszyła walka o <strong>zmianę zasad.</strong>
             </h1>
-          </div>
-          <aside className="hero-aside">
-            <p>
-              Gdy organ ochrony środowiska utrzymał decyzję o wstrzymaniu użytkowania instalacji
-              na Torze Poznań z powodu przekroczeń hałasu, uruchomiono odwołanie, rozmowy o
-              podniesieniu dopuszczalnych poziomów i projekt zmiany ustawy. <strong>Pokazujemy mechanizm.</strong>
-            </p>
-            <div className="button-row">
+            <div className="button-row hero-buttons">
               <a className="button button-accent" href="#mechanizm">
                 Zobacz mechanizm
               </a>
@@ -62,6 +55,13 @@ export default function Home() {
                 zweryfikowanych osób popiera egzekwowanie norm hałasu przy Torze Poznań
               </span>
             </Link>
+          </div>
+          <aside className="hero-aside">
+            <p>
+              Gdy organ ochrony środowiska utrzymał decyzję o wstrzymaniu użytkowania instalacji
+              na Torze Poznań z powodu przekroczeń hałasu, uruchomiono odwołanie, rozmowy o
+              podniesieniu dopuszczalnych poziomów i projekt zmiany ustawy. <strong>Pokazujemy mechanizm.</strong>
+            </p>
           </aside>
         </div>
       </section>
@@ -86,6 +86,53 @@ export default function Home() {
               W oficjalnym wykazie uczestników posiedzenia nie wskazano przedstawicieli okolicznych osiedli.
             </p>
           </div>
+        </div>
+      </section>
+
+
+      <section className="history-section" aria-labelledby="historia-toru">
+        <div className="container">
+          <div className="history-header">
+            <h2 id="historia-toru">TOR POZNAŃ: KTO BYŁ TU PIERWSZY?</h2>
+            <p>Fakty, które warto znać, zanim Sejm zmieni prawo</p>
+          </div>
+          <div className="history-timeline">
+            <article className="history-point">
+              <span className="history-dot history-dot-blue" aria-hidden="true" />
+              <h3>LATA 60.</h3>
+              <p>Powstają pierwsze domy w bezpośrednim sąsiedztwie terenu, na którym dziś leży tor.</p>
+            </article>
+            <article className="history-point">
+              <span className="history-dot history-dot-blue" aria-hidden="true" />
+              <h3>1977</h3>
+              <p>Na osiedlach Ławica i Wola oraz w Przeźmierowie mieszka już <strong>ponad 4 600 osób.</strong> W tym samym roku kończy się budowa <strong>toru doświadczalnego</strong> fabryki Polmo — nie toru wyścigowego.</p>
+            </article>
+            <article className="history-point history-point-alert">
+              <span className="history-dot history-dot-red" aria-hidden="true" />
+              <h3>PRZEŁOM LAT 70. I 80.</h3>
+              <p>Tor doświadczalny zostaje przekształcony w tor wyścigowy — <strong>bez pozwolenia na budowę.</strong> Sam twórca toru nazwał go później „dziką inwestycją”.</p>
+            </article>
+            <article className="history-point history-point-alert">
+              <span className="history-dot history-dot-red" aria-hidden="true" />
+              <h3>LATA 80.</h3>
+              <p>Budową toru zajmują się <strong>NIK i prokuratura.</strong> Stan wojenny przerywa postępowanie — nikt nie ponosi odpowiedzialności.</p>
+            </article>
+            <article className="history-point">
+              <span className="history-dot history-dot-blue" aria-hidden="true" />
+              <h3>2026</h3>
+              <p>Główny Inspektor Ochrony Środowiska nakazuje zamknięcie toru za <strong>przekraczanie norm hałasu.</strong></p>
+            </article>
+            <article className="history-point history-point-alert">
+              <span className="history-dot history-dot-red" aria-hidden="true" />
+              <h3>15 LIPCA 2026</h3>
+              <p>Sejm proceduje ustawę, która ma <strong>wyłączyć tory spod kontroli hałasu</strong> — wbrew unijnej dyrektywie 2002/49/WE i mimo zastrzeżeń Ministerstwa Klimatu i Środowiska.</p>
+            </article>
+          </div>
+          <div className="history-conclusion">
+            <strong>To nie mieszkańcy sprowadzili się do toru.</strong>
+            <span>To tor powstał wśród mieszkańców — bez pozwolenia na budowę.</span>
+          </div>
+          <p className="history-sources">Źródła: dane meldunkowe, raport NIK, F. Czekała „Miasto nie do Poznania” | Stowarzyszenie Ławica-Bajkowe</p>
         </div>
       </section>
 
@@ -181,68 +228,26 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <div className="section-header">
-            <p className="eyebrow">Co robi się zamiast ograniczenia emisji</p>
-            <h2 className="section-title">Domy nie stały się mniej mieszkalne. Hałas nie stał się mniej uciążliwy.</h2>
-          </div>
-          <div className="statement">
-            <p>Ma zmienić się norma, kwalifikacja terenu albo prawo chroniące Tor Poznań.</p>
-          </div>
-          <p className="section-lead">
-            Automobilklub Wielkopolski skorzystał z drogi odwoławczej. Równolegle politycy i przedstawiciele
-            środowiska motorowego pracowali nad rozwiązaniami pozwalającymi Torowi Poznań działać dalej.
-            Mieszkańcy mają prawo wiedzieć, kto podejmował te działania, na jakiej podstawie i dlaczego
-            priorytetem nie stało się trwałe ograniczenie hałasu u źródła.
-          </p>
-        </div>
-      </section>
-
       <VideoSection />
 
-      <section className="section section-red">
-        <div className="container">
-          <div className="section-header">
-            <p className="eyebrow">Automobilklub Wielkopolski</p>
-            <h2 className="section-title">Odwołanie jest prawem. Działanie za zamkniętymi drzwiami nie może zastąpić odpowiedzialności.</h2>
+      <section className="section" id="poparcie">
+        <div className="container support-layout">
+          <div>
+            <p className="eyebrow">Społeczny mandat</p>
+            <h2 className="section-title">Prawo ma chronić ludzi, nie wygodę operatora Toru Poznań.</h2>
+            <SupporterCounter large />
             <p className="section-lead">
-              Automobilklub skorzystał z odwołania, a wykonanie decyzji zostało wstrzymane. W tym samym
-              czasie politycy i przedstawiciele środowiska motorowego szukali sposobu, by Tor Poznań mógł
-              działać dalej: przez zmianę prawa, zmianę kwalifikacji terenu albo podniesienie dopuszczalnego
-              hałasu. Nie przedstawiono mieszkańcom równie konkretnego, wiążącego planu redukcji emisji u źródła.
+              zweryfikowanych osób popiera egzekwowanie norm hałasu oraz przejrzyste zasady działania
+              Toru Poznań.
+            </p>
+            <p className="section-lead">
+              Licznik pokazuje tylko wpisy zatwierdzone po weryfikacji. Dane kontaktowe nie są publiczne.
             </p>
           </div>
-
-          <div className="accountability-grid">
-            <article className="accountability-card">
-              <span>01</span>
-              <h3>Pełny kalendarz komercyjnego wykorzystania Toru Poznań</h3>
-              <p>Ile dni w roku Tor Poznań wynajmowano prywatnym i zagranicznym organizatorom oraz na jakich warunkach?</p>
-            </article>
-            <article className="accountability-card">
-              <span>02</span>
-              <h3>Wyniki kontroli każdego pojazdu</h3>
-              <p>Jakie limity obowiązywały przy wjeździe, ile pojazdów odrzucono i gdzie są raporty z kontroli?</p>
-            </article>
-            <article className="accountability-card">
-              <span>03</span>
-              <h3>Rejestr spotkań i działań lobbingowych</h3>
-              <p>Z kim spotykali się przedstawiciele operatora Toru Poznań po decyzji GIOŚ i jakie rozwiązania proponowali?</p>
-            </article>
-            <article className="accountability-card">
-              <span>04</span>
-              <h3>Wyjaśnienie odejścia od wcześniejszych ograniczeń</h3>
-              <p>Kto zdecydował o rezygnacji z modelu kontroli, ograniczonej liczby głośnych dni i konsultacji z mieszkańcami?</p>
-            </article>
-          </div>
-
-          <p className="accountability-note">
-            Automobilklub Wielkopolski może przekazać dokumenty, sprostowanie lub odpowiedź na adres
-            <a href="mailto:halastorpoznan@gmail.com"> halastorpoznan@gmail.com</a>. Opublikujemy rzeczową odpowiedź wraz ze źródłami.
-          </p>
+          <SupportForm />
         </div>
       </section>
+
 
       <section className="section section-dark">
         <div className="container">
@@ -264,24 +269,6 @@ export default function Home() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="section" id="poparcie">
-        <div className="container support-layout">
-          <div>
-            <p className="eyebrow">Społeczny mandat</p>
-            <h2 className="section-title">Prawo ma chronić ludzi, nie wygodę operatora Toru Poznań.</h2>
-            <SupporterCounter large />
-            <p className="section-lead">
-              zweryfikowanych osób popiera egzekwowanie norm hałasu oraz przejrzyste zasady działania
-              Toru Poznań.
-            </p>
-            <p className="section-lead">
-              Licznik pokazuje tylko wpisy zatwierdzone po weryfikacji. Dane kontaktowe nie są publiczne.
-            </p>
-          </div>
-          <SupportForm />
         </div>
       </section>
 

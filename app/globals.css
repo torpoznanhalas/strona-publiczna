@@ -918,3 +918,312 @@ h6,
     grid-template-columns: 1fr;
   }
 }
+
+/* Final layout adjustments: compact hero, responsive menu and history timeline */
+
+.hero {
+  min-height: auto;
+}
+
+.hero-grid {
+  align-items: start;
+  padding: 64px 0 72px;
+}
+
+.hero-main {
+  min-width: 0;
+}
+
+.hero-aside {
+  align-self: end;
+  padding: 0 0 8px;
+}
+
+.hero-buttons {
+  margin-top: 30px;
+}
+
+.hero-support-counter {
+  max-width: 560px;
+}
+
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 2px;
+  margin: 5px 0;
+  background: var(--text);
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.history-section {
+  padding: 0 0 94px;
+  border-top: 1px solid var(--line);
+  background: var(--background);
+}
+
+.history-header {
+  margin: 0 calc((100vw - min(calc(100vw - 40px), var(--max))) / -2) 64px;
+  padding: 36px max(20px, calc((100vw - var(--max)) / 2));
+  color: white;
+  background: #18304f;
+}
+
+.history-header h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.45rem);
+  line-height: 1.05;
+}
+
+.history-header p {
+  margin: 10px 0 0;
+  color: #ffd39c;
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
+  font-weight: 500;
+}
+
+.history-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 24px;
+  padding-top: 30px;
+}
+
+.history-timeline::before {
+  content: "";
+  position: absolute;
+  top: 43px;
+  left: 3%;
+  right: 3%;
+  height: 4px;
+  background: #18304f;
+}
+
+.history-point {
+  position: relative;
+  padding-top: 36px;
+}
+
+.history-dot {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.history-dot-blue {
+  background: #18304f;
+}
+
+.history-dot-red {
+  background: #c83b2e;
+}
+
+.history-point h3 {
+  margin: 0 0 10px;
+  color: #18304f;
+  font-size: clamp(1.05rem, 1.55vw, 1.35rem);
+  line-height: 1.12;
+}
+
+.history-point-alert h3 {
+  color: #c83b2e;
+}
+
+.history-point p {
+  margin: 0;
+  color: #3d3a36;
+  font-size: 0.95rem;
+  line-height: 1.48;
+}
+
+.history-conclusion {
+  display: grid;
+  gap: 4px;
+  margin-top: 52px;
+  padding: 24px;
+  color: white;
+  background: #18304f;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.history-conclusion strong {
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
+}
+
+.history-conclusion span {
+  color: #ffd39c;
+  font-size: clamp(1rem, 1.7vw, 1.35rem);
+}
+
+.history-sources {
+  margin: 16px 0 0;
+  color: #8f8b85;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+@media (max-width: 1000px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .hero-aside {
+    max-width: 720px;
+  }
+
+  .menu-toggle {
+    display: block;
+    position: relative;
+    z-index: 3;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px 20px 20px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(244, 241, 234, 0.99);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-open {
+    display: flex;
+  }
+
+  .nav a {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 1rem;
+  }
+
+  .nav a:last-child {
+    border-bottom: 0;
+  }
+
+  .history-timeline {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 38px 24px;
+  }
+
+  .history-timeline::before {
+    display: none;
+  }
+
+  .history-point {
+    padding-top: 38px;
+    border-top: 4px solid #18304f;
+  }
+
+  .history-point-alert {
+    border-top-color: #c83b2e;
+  }
+
+  .history-dot {
+    top: -16px;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-grid {
+    padding: 42px 0 52px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.1rem, 10.5vw, 3.2rem);
+  }
+
+  .hero-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .hero-buttons .button {
+    min-height: 48px;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+
+  .hero-support-counter {
+    max-width: none;
+    padding: 18px;
+  }
+
+  .history-section {
+    padding-bottom: 74px;
+  }
+
+  .history-header {
+    margin-bottom: 48px;
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  .history-timeline {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0 0 0 44px;
+  }
+
+  .history-timeline::before {
+    display: block;
+    top: 4px;
+    bottom: 4px;
+    left: 13px;
+    right: auto;
+    width: 4px;
+    height: auto;
+  }
+
+  .history-point,
+  .history-point-alert {
+    min-height: 0;
+    padding: 0 0 38px 12px;
+    border-top: 0;
+  }
+
+  .history-point:last-child {
+    padding-bottom: 0;
+  }
+
+  .history-dot {
+    top: 0;
+    left: -44px;
+  }
+
+  .history-point h3 {
+    font-size: 1.25rem;
+  }
+
+  .history-point p {
+    font-size: 1rem;
+  }
+
+  .history-conclusion {
+    margin-top: 42px;
+    padding: 22px 18px;
+  }
+}
