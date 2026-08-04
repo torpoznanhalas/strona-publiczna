@@ -6,7 +6,6 @@ import { useState } from "react";
 export function Header() {
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
-
   return (
     <header className="header">
       <div className="container header-inner">
@@ -19,7 +18,6 @@ export function Header() {
           <span className="brand-mark">●</span>
           <span>Hałas z Toru Poznań</span>
         </Link>
-
         <button
           className="menu-toggle"
           type="button"
@@ -32,12 +30,14 @@ export function Header() {
           <span />
           <span />
         </button>
-
         <nav
           id="main-navigation"
           className={`nav${open ? " nav-open" : ""}`}
           aria-label="Główna nawigacja"
         >
+          <Link href="/" onClick={closeMenu}>
+            Strona główna
+          </Link>
           <Link href="/fakty" onClick={closeMenu}>
             Fakty
           </Link>
@@ -54,7 +54,6 @@ export function Header() {
             Dołącz się
           </Link>
         </nav>
-
         <Link className="header-join" href="/#poparcie" onClick={closeMenu}>
           Dołącz się
         </Link>
