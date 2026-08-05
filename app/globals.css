@@ -2151,3 +2151,29 @@ h6,
     scrollbar-gutter: stable;
   }
 }
+
+/* v14 — lista poparcia: dokładnie 10 widocznych rekordów, reszta przewijana */
+.support-cards-grid {
+  align-items: start;
+}
+
+.support-cards-grid > .supporter-directory {
+  height: auto;
+  min-height: 0;
+  align-self: start;
+  overflow: hidden;
+}
+
+.support-cards-grid .supporter-directory-scroll {
+  flex: 0 0 auto;
+  height: 620px;
+  min-height: 0;
+  max-height: 620px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.support-cards-grid .supporter-directory-row {
+  min-height: 62px;
+}
