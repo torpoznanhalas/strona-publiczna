@@ -1,6 +1,7 @@
 import { SupporterActivity } from "@/components/SupporterActivity";
 import { SupporterDirectory } from "@/components/SupporterDirectory";
 import { SupportForm } from "@/components/SupportForm";
+import { SupportersProvider } from "@/components/SupportersProvider";
 import { VideoSection } from "@/components/VideoSection";
 
 const demands = [
@@ -33,7 +34,7 @@ const demands = [
 
 export default function Home() {
   return (
-    <>
+    <SupportersProvider>
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-main">
@@ -104,6 +105,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </SupportersProvider>
   );
 }

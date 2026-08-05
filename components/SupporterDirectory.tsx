@@ -1,24 +1,12 @@
 "use client";
 
 import { UIEvent, useCallback, useEffect, useRef, useState } from "react";
-
-type PublicSupporter = {
-  firstName: string;
-  lastInitial: string;
-  city: string;
-  postalCode: string;
-  createdAt: string;
-};
-
-type SupportersResponse = {
-  supporters?: PublicSupporter[];
-  publicCount?: number;
-  hasMore?: boolean;
-};
-
-type LoadMode = "replace" | "append" | "refresh";
-
-const PAGE_SIZE = 50;
+import {
+  PublicSupporter,
+  SUPPORTERS_PAGE_SIZE,
+  SupportersResponse,
+  useSupporters
+} from "@/components/SupportersProvider";
 
 const dateFormatter = new Intl.DateTimeFormat("pl-PL", {
   day: "2-digit",
@@ -48,15 +36,34 @@ function mergeUnique(first: PublicSupporter[], second: PublicSupporter[]) {
 }
 
 export function SupporterDirectory() {
+  const {
+    data,
+    loading: initialLoading,
+    error: initialError
+  } = useSupporters();
   const [supporters, setSupporters] = useState<PublicSupporter[]>([]);
   const [publicCount, setPublicCount] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const supportersRef = useRef<PublicSupporter[]>([]);
   const loadingRef = useRef(false);
 
-  const loadPage = useCallback(async (offset: number, mode: LoadMode) => {
+  useEffect(() => {
+    if (!data) return;
+
+    const firstPage = Array.isArray(data.supporters) ? data.supporters : [];
+    const merged = mergeUnique(firstPage, supportersRef.current);
+    const total = Number(data.publicCount) || 0;
+
+    supportersRef.current = merged;
+    setSupporters(merged);
+    setPublicCount(total);
+    setHasMore(merged.length < total && data.hasMore !== false);
+    setError("");
+  }, [data]);
+
+  const loadNextPage = useCallback(async () => {
     if (loadingRef.current) return;
 
     loadingRef.current = true;
@@ -65,8 +72,7 @@ export function SupporterDirectory() {
 
     try {
       const response = await fetch(
-        `/api/supporters?limit=${PAGE_SIZE}&offset=${offset}`,
-        { cache: "no-store" }
+        `/api/supporters?limit=${SUPPORTERS_PAGE_SIZE}&offset=${supportersRef.current.length}`
       );
 
       if (!response.ok) {
@@ -76,20 +82,12 @@ export function SupporterDirectory() {
       const data = (await response.json()) as SupportersResponse;
       const nextSupporters = Array.isArray(data.supporters) ? data.supporters : [];
       const total = Number(data.publicCount) || 0;
-      let merged: PublicSupporter[];
-
-      if (mode === "replace") {
-        merged = nextSupporters;
-      } else if (mode === "refresh") {
-        merged = mergeUnique(nextSupporters, supportersRef.current);
-      } else {
-        merged = mergeUnique(supportersRef.current, nextSupporters);
-      }
+      const merged = mergeUnique(supportersRef.current, nextSupporters);
 
       supportersRef.current = merged;
       setSupporters(merged);
       setPublicCount(total);
-      setHasMore(merged.length < total);
+      setHasMore(merged.length < total && data.hasMore !== false);
     } catch (caughtError) {
       setError(
         caughtError instanceof Error
@@ -102,30 +100,18 @@ export function SupporterDirectory() {
     }
   }, []);
 
-  useEffect(() => {
-    const refresh = () => {
-      void loadPage(0, supportersRef.current.length === 0 ? "replace" : "refresh");
-    };
-
-    refresh();
-    const timer = window.setInterval(refresh, 30000);
-    window.addEventListener("supporter-added", refresh);
-
-    return () => {
-      window.clearInterval(timer);
-      window.removeEventListener("supporter-added", refresh);
-    };
-  }, [loadPage]);
-
   const handleScroll = (event: UIEvent<HTMLDivElement>) => {
     const element = event.currentTarget;
     const distanceFromBottom =
       element.scrollHeight - element.scrollTop - element.clientHeight;
 
     if (distanceFromBottom < 120 && hasMore && !loading) {
-      void loadPage(supportersRef.current.length, "append");
+      void loadNextPage();
     }
   };
+
+  const isInitialLoading = initialLoading && supporters.length === 0;
+  const visibleError = error || (data ? "" : initialError);
 
   return (
     <div className="supporter-directory">
@@ -134,7 +120,9 @@ export function SupporterDirectory() {
           <p className="supporter-directory-eyebrow">Publiczna lista poparcia</p>
           <h3>Osoby, które dołączyły</h3>
         </div>
-        <span className="supporter-directory-count">{publicCount}</span>
+        <span className="supporter-directory-count">
+          {data ? publicCount : "—"}
+        </span>
       </div>
       <div
         className="supporter-directory-scroll"
@@ -143,6 +131,18 @@ export function SupporterDirectory() {
         aria-label="Przewijana lista osób wspierających inicjatywę"
       >
         <ol className="supporter-directory-list">
+          {isInitialLoading &&
+            Array.from({ length: 10 }, (_, index) => (
+              <li
+                className="supporter-directory-row is-loading"
+                key={`loading-${index}`}
+                aria-hidden="true"
+              >
+                <span className="supporter-directory-placeholder" />
+                <span className="supporter-directory-placeholder supporter-directory-placeholder-medium" />
+                <span className="supporter-directory-placeholder supporter-directory-placeholder-short" />
+              </li>
+            ))}
           {supporters.map((supporter) => (
             <li
               className="supporter-directory-row"
@@ -159,21 +159,21 @@ export function SupporterDirectory() {
           ))}
         </ol>
 
-        {loading && (
+        {loading && supporters.length > 0 && (
           <p className="supporter-directory-message" aria-live="polite">
             Ładuję kolejne osoby…
           </p>
         )}
 
-        {!loading && supporters.length === 0 && !error && (
+        {!isInitialLoading && supporters.length === 0 && !visibleError && (
           <p className="supporter-directory-message">
             Pierwsze wpisy pojawią się tutaj automatycznie po dołączeniu.
           </p>
         )}
 
-        {error && (
+        {visibleError && (
           <p className="supporter-directory-message supporter-directory-error">
-            {error}
+            {visibleError}
           </p>
         )}
 
@@ -181,7 +181,7 @@ export function SupporterDirectory() {
           <button
             className="supporter-directory-more"
             type="button"
-            onClick={() => void loadPage(supportersRef.current.length, "append")}
+            onClick={() => void loadNextPage()}
           >
             Pokaż kolejne osoby
           </button>

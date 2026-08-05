@@ -1,19 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { SupporterCounter } from "@/components/SupporterCounter";
-
-type PublicSupporter = {
-  firstName: string;
-  lastInitial: string;
-  city: string;
-  postalCode: string;
-  createdAt: string;
-};
-
-type SupportersResponse = {
-  supporters?: PublicSupporter[];
-};
+import {
+  PublicSupporter,
+  useSupporters
+} from "@/components/SupportersProvider";
 
 const dateFormatter = new Intl.DateTimeFormat("pl-PL", {
   day: "numeric",
@@ -29,45 +20,12 @@ function formatPlace(supporter: PublicSupporter) {
 }
 
 export function SupporterActivity() {
-  const [supporters, setSupporters] = useState<PublicSupporter[]>([]);
-  const [loaded, setLoaded] = useState(false);
+  const { data, loading } = useSupporters();
+  const supporters = Array.isArray(data?.supporters)
+    ? data.supporters.slice(0, 8)
+    : [];
 
-  useEffect(() => {
-    let active = true;
-
-    const load = async () => {
-      try {
-        const response = await fetch("/api/supporters?limit=8&offset=0", {
-          cache: "no-store"
-        });
-        if (!response.ok) return;
-
-        const data = (await response.json()) as SupportersResponse;
-        if (active) {
-          setSupporters(Array.isArray(data.supporters) ? data.supporters : []);
-          setLoaded(true);
-        }
-      } catch {
-        if (active) setLoaded(true);
-      }
-    };
-
-    const handleSupporterAdded = () => {
-      void load();
-    };
-
-    void load();
-    const timer = window.setInterval(load, 30000);
-    window.addEventListener("supporter-added", handleSupporterAdded);
-
-    return () => {
-      active = false;
-      window.clearInterval(timer);
-      window.removeEventListener("supporter-added", handleSupporterAdded);
-    };
-  }, []);
-
-  if (loaded && supporters.length === 0) {
+  if (!loading && supporters.length === 0) {
     return null;
   }
 

@@ -8,6 +8,56 @@ export const dynamic = "force-dynamic";
 
 const PUBLIC_POSTAL_CODE_PRIVACY_VERSION = "2026-08-04-v2";
 const ACTIVE_STATUS_FILTER = "status=in.(approved,pending)";
+const LOCAL_PREVIEW_MODE = process.env.LOCAL_PREVIEW_MODE === "true";
+const LOCAL_PREVIEW_COUNT = 128;
+const LOCAL_PREVIEW_MESSAGE =
+  "Tryb lokalnego podglądu — zgłoszenie nie zostało zapisane";
+const PUBLIC_CACHE_CONTROL =
+  "public, max-age=30, s-maxage=30, stale-while-revalidate=60";
+
+const LOCAL_PREVIEW_FIRST_NAMES = [
+  "Anna",
+  "Marek",
+  "Joanna",
+  "Piotr",
+  "Katarzyna",
+  "Tomasz",
+  "Agnieszka",
+  "Michał",
+  "Monika",
+  "Paweł",
+  "Ewa",
+  "Jakub"
+];
+
+const LOCAL_PREVIEW_PLACES = [
+  { city: "Poznań", postalCode: "60-186" },
+  { city: "Przeźmierowo", postalCode: "62-081" },
+  { city: "Poznań", postalCode: "60-189" },
+  { city: "Baranowo", postalCode: "62-081" },
+  { city: "Poznań", postalCode: "60-185" },
+  { city: "Skórzewo", postalCode: "60-185" },
+  { city: "Poznań", postalCode: "60-175" },
+  { city: "Wysogotowo", postalCode: "62-081" }
+];
+
+const LOCAL_PREVIEW_SUPPORTERS = Array.from(
+  { length: LOCAL_PREVIEW_COUNT },
+  (_, index) => {
+    const place = LOCAL_PREVIEW_PLACES[index % LOCAL_PREVIEW_PLACES.length];
+    const joinedAt = new Date(Date.UTC(2026, 7, 5, 10, 0));
+    joinedAt.setUTCDate(joinedAt.getUTCDate() - index);
+
+    return {
+      firstName:
+        LOCAL_PREVIEW_FIRST_NAMES[index % LOCAL_PREVIEW_FIRST_NAMES.length],
+      lastInitial: String.fromCharCode(65 + ((index * 7) % 26)),
+      city: place.city,
+      postalCode: place.postalCode,
+      createdAt: joinedAt.toISOString()
+    };
+  }
+);
 
 function getClientIp(request: Request) {
   const forwarded = request.headers.get("x-forwarded-for");
@@ -113,17 +163,25 @@ export async function GET(request: Request) {
     );
     const offset = parsePositiveInteger(requestUrl.searchParams.get("offset"), 0);
 
-    const count = await getCount(ACTIVE_STATUS_FILTER);
-    const publicCount = await getCount(
-      `${ACTIVE_STATUS_FILTER}&public_display_consent=eq.true`
-    );
-    let supporters: Awaited<ReturnType<typeof getPublicSupporters>> = [];
+    if (LOCAL_PREVIEW_MODE) {
+      const supporters = LOCAL_PREVIEW_SUPPORTERS.slice(offset, offset + limit);
 
-    try {
-      supporters = await getPublicSupporters(limit, offset);
-    } catch {
-      // Awaria listy publicznej nie może wyzerować działającego licznika.
+      return NextResponse.json(
+        {
+          count: LOCAL_PREVIEW_COUNT,
+          publicCount: LOCAL_PREVIEW_COUNT,
+          supporters,
+          hasMore: offset + supporters.length < LOCAL_PREVIEW_COUNT
+        },
+        { headers: { "Cache-Control": PUBLIC_CACHE_CONTROL } }
+      );
     }
+
+    const [count, publicCount, supporters] = await Promise.all([
+      getCount(ACTIVE_STATUS_FILTER),
+      getCount(`${ACTIVE_STATUS_FILTER}&public_display_consent=eq.true`),
+      getPublicSupporters(limit, offset).catch(() => [])
+    ]);
 
     return NextResponse.json(
       {
@@ -132,7 +190,7 @@ export async function GET(request: Request) {
         supporters,
         hasMore: offset + supporters.length < publicCount
       },
-      { headers: { "Cache-Control": "no-store, max-age=0" } }
+      { headers: { "Cache-Control": PUBLIC_CACHE_CONTROL } }
     );
   } catch {
     return NextResponse.json(
@@ -151,6 +209,10 @@ export async function POST(request: Request) {
   try {
     const input = await request.json();
     const payload = parseSupporterPayload(input);
+
+    if (LOCAL_PREVIEW_MODE) {
+      return NextResponse.json({ message: LOCAL_PREVIEW_MESSAGE });
+    }
 
     // Niewidoczne pole wypełniają zwykle automaty. Człowiek go nie widzi.
     if (payload.website) {
