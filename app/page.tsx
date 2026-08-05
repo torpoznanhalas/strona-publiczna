@@ -13,22 +13,27 @@ const demands = [
   {
     title: "Kontrola każdego pojazdu",
     description:
-      "Pomiar głośności w trakcie trwania wyścigów i zawodów, oraz bezwzględne wykluczanie z nich pojazdów przekraczających limit."
+      "Bezkompromisowy pomiar głośności w trakcie trwania jazd i wyścigów oraz natychmiastowe, bezwzględne wykluczanie z toru pojazdów przekraczających normy."
   },
   {
-    title: "Harmonogram i limity wyścigów",
+    title: "Pilne inwestycje infrastrukturalne",
     description:
-      "Wyścigi i zawody wyłącznie w dni robocze, w godzinach 8.00-16.00. Nie więcej niż 20 dni w ciągu roku. "
+      "Podwyższenie wałów przy ul. Bukowskiej, usypanie wałów wschodnich (od strony lotniska) oraz montaż odpowiednio sparametryzowanych ekranów akustycznych."
+  },
+  {
+    title: "Ochrona poranków i sztywny harmonogram",
+    description:
+      "Ścisłe ograniczenie jazd do godzin 10.00–16.00 (max. 20 dni w roku). Bezwzględna ochrona godzin porannych dla mieszkańców pracujących zdalnie, freelancerów oraz medyków i pracowników odpoczywających po nocnych dyżurach."
   },
   {
     title: "Bezwzględna ochrona weekendów",
     description:
-      "Zakaz wyścigów i zawodów na torze w weekendy - jedyne dni odpoczynku dla tysięcy okolicznych rodzin."
+      "Całkowity zakaz hałaśliwych jazd i wyścigów w soboty i niedziele — weekendy to jedyne dni pełnej regeneracji i odpoczynku dla tysięcy okolicznych rodzin."
   },
   {
     title: "Równy głos mieszkańców",
     description:
-      "Stały zespół konsultacyjny z równą reprezentacją mieszkańców, samorządów i władz Automobilklubu Wielkopolskiego."
+      "Powołanie stałego zespołu konsultacyjnego z równą reprezentacją mieszkańców, samorządu, władz miasta oraz Automobilklubu Wielkopolskiego."
   }
 ];
 
@@ -45,12 +50,10 @@ export default function Home() {
               </span>
             </h1>
             <p className="hero-description">
-              Główny Inspektor Ochrony Środowiska potwierdził przekroczenia dopuszczalnych poziomów
-              hałasu przez Tor Poznań i utrzymał decyzję o wstrzymaniu jego użytkowania.
-              Wykonanie decyzji zostało jednak wstrzymane, a w Sejmie procedowany jest projekt
-              próbujący wyłączyć tory wyścigowe z norm hałasu. Nie żądamy likwidacji Toru Poznań.
-              Żądamy przestrzegania prawa, profesjonalnego wyciszenia toru,
-              ograniczenia dni i godzin hałaśliwych jazd, oraz uwzględnienia mieszkańców w decyzjach.
+              GIOŚ nakazał wstrzymanie użytkowania Toru Poznań, ale wykonanie decyzji zawieszono, a w Sejmie – przy wsparciu wybranych posłów – trwa
+               próba napisania ustawy pod Automobilklub Wielkopolski i wyłączenia obiektu spod prawa. Żądamy ukrócenia tych patologicznych układów,
+              wyegzekwowania norm hałasu, profesjonalnego wyciszenia toru i ograniczenia jazd w imię ochrony zdrowia mieszkańców.
+              Nie żądamy likwidacji Toru Poznań – żądamy praworządności.
             </p>
             <div className="button-row hero-buttons">
               <a className="button button-accent" href="#nagrania">
@@ -86,7 +89,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">
-              Żądamy przestrzegania praw do ciszy i wypoczynku, mieszkańców Ławicy, os. Bajkowego, Przeźmierowa i Smochowic.
+              6. postulatów mieszkańców Ławicy, Osiedla Bajkowego, Przeźmierowa, Woli i Smochowic.
             </h2>
             <p className="section-lead">
               Tor Poznań może działać tylko wtedy, gdy jego działalność jest ściśle kontrolowana, zaplanowana,

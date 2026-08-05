@@ -14,6 +14,11 @@ const initialState = {
   website: ""
 };
 
+function formatPostalCode(value: string) {
+  const digits = value.replace(/\D/g, "").slice(0, 5);
+  return digits.length > 2 ? `${digits.slice(0, 2)}-${digits.slice(2)}` : digits;
+}
+
 export function SupportForm() {
   const [form, setForm] = useState(initialState);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -107,7 +112,7 @@ export function SupportForm() {
             inputMode="numeric"
             placeholder="00-000"
             value={form.postalCode}
-            onChange={(event) => update("postalCode", event.target.value)}
+            onChange={(event) => update("postalCode", formatPostalCode(event.target.value))}
             maxLength={6}
           />
         </div>
@@ -142,22 +147,12 @@ export function SupportForm() {
       <label className="checkbox">
         <input
           type="checkbox"
-          checked={form.adult}
-          onChange={(event) => update("adult", event.target.checked)}
-          required
-        />
-        <span>Oświadczam, że mam ukończone 18 lat.</span>
-      </label>
-
-      <label className="checkbox">
-        <input
-          type="checkbox"
           checked={form.privacy}
           onChange={(event) => update("privacy", event.target.checked)}
           required
         />
         <span>
-          Popieram żądanie, aby Tor Poznań działał z poszanowaniem norm hałasu i praw mieszkańców.
+          <b>Popieram postulaty mieszkańców, dotyczące przestrzegania prawa do ciszy i wypoczynku.</b>
           Akceptuję przetwarzanie danych w celu obsługi listy poparcia zgodnie z polityką prywatności.
         </span>
       </label>
@@ -174,6 +169,16 @@ export function SupportForm() {
           miejscowość, pełny kod pocztowy — jeśli został podany — oraz data dołączenia.
           Adres e-mail pozostanie niepubliczny.
         </span>
+      </label>
+
+      <label className="checkbox">
+        <input
+          type="checkbox"
+          checked={form.adult}
+          onChange={(event) => update("adult", event.target.checked)}
+          required
+        />
+        <span>Oświadczam, że mam ukończone 18 lat.</span>
       </label>
 
       <p className="form-note">

@@ -38,11 +38,11 @@ export function Header() {
           <Link href="/" onClick={closeMenu}>
             Strona główna
           </Link>
-          <Link href="/fakty" onClick={closeMenu}>
-            Fakty
-          </Link>
           <Link href="/#nagrania" onClick={closeMenu}>
-            Nagrania
+            Nagrania hałasu
+          </Link>
+          <Link href="/fakty" onClick={closeMenu}>
+            Aktualności
           </Link>
           <Link href="/historia" onClick={closeMenu}>
             Historia Toru

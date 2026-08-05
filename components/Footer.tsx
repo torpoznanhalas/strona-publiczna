@@ -5,8 +5,12 @@ export function Footer() {
     <footer className="footer">
       <div className="container footer-grid">
         <div>
-          <p className="footer-title">Stowarzyszenie Mieszkańców Ławica-Bajkowe</p>
-          <p>Stowarzyszenie zwykłe · nr w ewidencji 583</p>
+          <p className="footer-title">Stowarzyszenie Mieszkańców Ławica-Bajkowe.<br></br>
+            Stowarzyszenie Przyjaciół Przeźmierowa i Baranowa.<br></br>
+            Stowarzyszenie Wolna Wola.<br></br>
+            Mieszkańcy Smochowic.<br></br><br></br>
+          </p>
+
           <p>
             Kontakt: <a href="mailto:halastorpoznan@gmail.com">halastorpoznan@gmail.com</a>
           </p>

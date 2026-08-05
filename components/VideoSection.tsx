@@ -9,15 +9,6 @@ export function VideoSection() {
             Posłuchaj nagrań hałasu z Toru Poznań wykonanych na Ławicy, os. Bajkowym,
             w Przeźmierowie, Smochowicach.
           </h2>
-          <div className="recordings-intro">
-            <p>
-              Tak brzmi praca, odpoczynek, rozmowa przy otwartym
-              oknie albo sen małego dziecka — nie zastępują one pomiarów akustycznych, ale pokazują
-              gwałtowność, powtarzalność i czas trwania hałasu. Długotrwała ekspozycja na hałas
-              środowiskowy może zaburzać sen, wpływać na układ krążenia i pogarszać koncentrację,
-              szczególnie u dzieci.
-            </p>
-          </div>
         </div>
 
         {videos.length > 0 ? (
@@ -40,6 +31,28 @@ export function VideoSection() {
             ))}
           </div>
         ) : null}
+
+        <div className="recordings-intro">
+          <p>
+            Tak brzmi praca, odpoczynek, rozmowa przy otwartym oknie albo sen dziecka — nagrania
+            te pokazują gwałtowność, powtarzalność i dewastujący charakter hałasu. Ciągły hałas
+            środowiskowy bezpowrotnie niszczy zdrowie: dewastuje układ krążenia, wywołuje
+            przewlekły stres i odbiera prawo do głębokiego snu.
+          </p>
+          <ul className="recordings-impact-list">
+            <li>
+              <strong>Dzieciom</strong> niszczy koncentrację i zaburza prawidłowy rozwój.
+            </li>
+            <li>
+              <strong>Młodym ludziom</strong> – wykończonym po ciężkim dniu w pracy – uniemożliwia
+              jakąkolwiek regenerację i odpoczynek.
+            </li>
+            <li>
+              <strong>Osobom starszym</strong> bezpośrednio zagraża, potęgując problemy z sercem i
+              ciśnieniem.
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   );
