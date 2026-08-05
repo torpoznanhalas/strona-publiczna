@@ -1,6 +1,6 @@
 "use client";
 
-import { UIEvent, useEffect, useState } from "react";
+import { UIEvent, useCallback, useEffect, useRef, useState } from "react";
 
 type PublicSupporter = {
   firstName: string;
@@ -15,6 +15,8 @@ type SupportersResponse = {
   publicCount?: number;
   hasMore?: boolean;
 };
+
+type LoadMode = "replace" | "append" | "refresh";
 
 const PAGE_SIZE = 50;
 
@@ -31,16 +33,33 @@ function formatPlace(supporter: PublicSupporter) {
     : supporter.city;
 }
 
+function getSupporterKey(supporter: PublicSupporter) {
+  return `${supporter.firstName}-${supporter.lastInitial}-${supporter.city}-${supporter.createdAt}`;
+}
+
+function mergeUnique(first: PublicSupporter[], second: PublicSupporter[]) {
+  const seen = new Set<string>();
+  return [...first, ...second].filter((supporter) => {
+    const key = getSupporterKey(supporter);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 export function SupporterDirectory() {
   const [supporters, setSupporters] = useState<PublicSupporter[]>([]);
   const [publicCount, setPublicCount] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const supportersRef = useRef<PublicSupporter[]>([]);
+  const loadingRef = useRef(false);
 
-  const loadPage = async (offset: number) => {
-    if (loading || !hasMore) return;
+  const loadPage = useCallback(async (offset: number, mode: LoadMode) => {
+    if (loadingRef.current) return;
 
+    loadingRef.current = true;
     setLoading(true);
     setError("");
 
@@ -56,27 +75,21 @@ export function SupporterDirectory() {
 
       const data = (await response.json()) as SupportersResponse;
       const nextSupporters = Array.isArray(data.supporters) ? data.supporters : [];
+      const total = Number(data.publicCount) || 0;
+      let merged: PublicSupporter[];
 
-      setSupporters((current) => {
-        const existing = new Set(
-          current.map(
-            (supporter) =>
-              `${supporter.firstName}-${supporter.lastInitial}-${supporter.city}-${supporter.createdAt}`
-          )
-        );
+      if (mode === "replace") {
+        merged = nextSupporters;
+      } else if (mode === "refresh") {
+        merged = mergeUnique(nextSupporters, supportersRef.current);
+      } else {
+        merged = mergeUnique(supportersRef.current, nextSupporters);
+      }
 
-        return [
-          ...current,
-          ...nextSupporters.filter(
-            (supporter) =>
-              !existing.has(
-                `${supporter.firstName}-${supporter.lastInitial}-${supporter.city}-${supporter.createdAt}`
-              )
-          )
-        ];
-      });
-      setPublicCount(Number(data.publicCount) || 0);
-      setHasMore(data.hasMore === true);
+      supportersRef.current = merged;
+      setSupporters(merged);
+      setPublicCount(total);
+      setHasMore(merged.length < total);
     } catch (caughtError) {
       setError(
         caughtError instanceof Error
@@ -84,15 +97,25 @@ export function SupporterDirectory() {
           : "Nie udało się pobrać listy osób wspierających."
       );
     } finally {
+      loadingRef.current = false;
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    void loadPage(0);
-    // Pierwsza strona ma zostać pobrana tylko raz po zamontowaniu komponentu.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const refresh = () => {
+      void loadPage(0, supportersRef.current.length === 0 ? "replace" : "refresh");
+    };
+
+    refresh();
+    const timer = window.setInterval(refresh, 30000);
+    window.addEventListener("supporter-added", refresh);
+
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener("supporter-added", refresh);
+    };
+  }, [loadPage]);
 
   const handleScroll = (event: UIEvent<HTMLDivElement>) => {
     const element = event.currentTarget;
@@ -100,7 +123,7 @@ export function SupporterDirectory() {
       element.scrollHeight - element.scrollTop - element.clientHeight;
 
     if (distanceFromBottom < 120 && hasMore && !loading) {
-      void loadPage(supporters.length);
+      void loadPage(supportersRef.current.length, "append");
     }
   };
 
@@ -113,7 +136,6 @@ export function SupporterDirectory() {
         </div>
         <span className="supporter-directory-count">{publicCount}</span>
       </div>
-
       <div
         className="supporter-directory-scroll"
         onScroll={handleScroll}
@@ -124,7 +146,7 @@ export function SupporterDirectory() {
           {supporters.map((supporter) => (
             <li
               className="supporter-directory-row"
-              key={`${supporter.firstName}-${supporter.lastInitial}-${supporter.city}-${supporter.createdAt}`}
+              key={getSupporterKey(supporter)}
             >
               <strong>
                 {supporter.firstName} {supporter.lastInitial}.
@@ -145,7 +167,7 @@ export function SupporterDirectory() {
 
         {!loading && supporters.length === 0 && !error && (
           <p className="supporter-directory-message">
-            Pierwsze publiczne wpisy pojawią się po ich zatwierdzeniu.
+            Pierwsze wpisy pojawią się tutaj automatycznie po dołączeniu.
           </p>
         )}
 
@@ -159,7 +181,7 @@ export function SupporterDirectory() {
           <button
             className="supporter-directory-more"
             type="button"
-            onClick={() => void loadPage(supporters.length)}
+            onClick={() => void loadPage(supportersRef.current.length, "append")}
           >
             Pokaż kolejne osoby
           </button>
@@ -167,7 +189,7 @@ export function SupporterDirectory() {
 
         {!hasMore && supporters.length > 0 && (
           <p className="supporter-directory-message">
-            To wszystkie osoby, które zgodziły się na publiczne pokazanie wpisu.
+            To wszystkie osoby znajdujące się obecnie na publicznej liście poparcia.
           </p>
         )}
       </div>

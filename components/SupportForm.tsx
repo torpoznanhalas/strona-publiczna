@@ -34,7 +34,6 @@ export function SupportForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
       });
-
       const data = (await response.json()) as { message?: string };
 
       if (!response.ok) {
@@ -44,9 +43,10 @@ export function SupportForm() {
       setStatus("success");
       setMessage(
         data.message ||
-          "Dziękujemy. Zgłoszenie zostało zapisane i po weryfikacji zostanie doliczone do licznika."
+          "Dziękujemy. Twój głos został zapisany i od razu pojawił się na liście poparcia."
       );
       setForm(initialState);
+      window.dispatchEvent(new Event("supporter-added"));
     } catch (error) {
       setStatus("error");
       setMessage(error instanceof Error ? error.message : "Wystąpił nieoczekiwany błąd.");
@@ -167,6 +167,7 @@ export function SupportForm() {
           type="checkbox"
           checked={form.publicDisplay}
           onChange={(event) => update("publicDisplay", event.target.checked)}
+          required
         />
         <span>
           Zgadzam się na publiczne pokazanie zapisu w formie: imię, pierwsza litera nazwiska,

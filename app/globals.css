@@ -2137,3 +2137,17 @@ h6,
     background: var(--text);
   }
 }
+
+/* v13 — stała wysokość listy poparcia i przewijanie wewnątrz ramki */
+@media (min-width: 1001px) {
+  .support-cards-grid > .supporter-directory {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .support-cards-grid .supporter-directory-scroll {
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+}

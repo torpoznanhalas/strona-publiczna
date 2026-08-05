@@ -7,6 +7,11 @@ type CounterProps = {
   className?: string;
 };
 
+type SupporterCountResponse = {
+  count?: number;
+  publicCount?: number;
+};
+
 export function SupporterCounter({ large = false, className = "" }: CounterProps) {
   const [count, setCount] = useState<number | null>(null);
 
@@ -15,21 +20,32 @@ export function SupporterCounter({ large = false, className = "" }: CounterProps
 
     const load = async () => {
       try {
-        const response = await fetch("/api/supporters", { cache: "no-store" });
+        const response = await fetch("/api/supporters?limit=1&offset=0", {
+          cache: "no-store"
+        });
         if (!response.ok) return;
-        const data = (await response.json()) as { count: number };
-        if (active) setCount(data.count);
+
+        const data = (await response.json()) as SupporterCountResponse;
+        if (active) {
+          setCount(Number(data.publicCount ?? data.count) || 0);
+        }
       } catch {
         // Licznik pozostanie w stanie zastępczym, jeżeli API jest chwilowo niedostępne.
       }
     };
 
+    const handleSupporterAdded = () => {
+      void load();
+    };
+
     void load();
     const timer = window.setInterval(load, 30000);
+    window.addEventListener("supporter-added", handleSupporterAdded);
 
     return () => {
       active = false;
       window.clearInterval(timer);
+      window.removeEventListener("supporter-added", handleSupporterAdded);
     };
   }, []);
 

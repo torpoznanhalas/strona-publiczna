@@ -7,6 +7,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const PUBLIC_POSTAL_CODE_PRIVACY_VERSION = "2026-08-04-v2";
+const ACTIVE_STATUS_FILTER = "status=in.(approved,pending)";
 
 function getClientIp(request: Request) {
   const forwarded = request.headers.get("x-forwarded-for");
@@ -33,7 +34,6 @@ async function verifyTurnstile(token: string | undefined, ip: string) {
     body: formData,
     cache: "no-store"
   });
-
   if (!response.ok) return false;
   const result = (await response.json()) as { success?: boolean };
   return result.success === true;
@@ -71,7 +71,7 @@ function parsePositiveInteger(value: string | null, fallback: number) {
 
 async function getPublicSupporters(limit: number, offset: number) {
   const response = await supabaseAdminFetch(
-    `/supporters?select=first_name,last_initial,city,postal_code,created_at,privacy_version&status=eq.approved&public_display_consent=eq.true&order=created_at.desc&offset=${offset}&limit=${limit}`,
+    `/supporters?select=first_name,last_initial,city,postal_code,created_at,privacy_version&${ACTIVE_STATUS_FILTER}&public_display_consent=eq.true&order=created_at.desc&offset=${offset}&limit=${limit}`,
     { method: "GET" }
   );
 
@@ -80,13 +80,11 @@ async function getPublicSupporters(limit: number, offset: number) {
   }
 
   const rows = (await response.json()) as PublicSupporterRow[];
-
   return rows
     .map((row) => {
       const privacyVersion = String(row.privacy_version ?? "");
       const canShowPostalCode =
         privacyVersion === PUBLIC_POSTAL_CODE_PRIVACY_VERSION;
-
       return {
         firstName: String(row.first_name ?? "").trim().slice(0, 80),
         lastInitial: String(row.last_initial ?? "").trim().slice(0, 1).toUpperCase(),
@@ -115,11 +113,10 @@ export async function GET(request: Request) {
     );
     const offset = parsePositiveInteger(requestUrl.searchParams.get("offset"), 0);
 
-    const count = await getCount("status=eq.approved");
+    const count = await getCount(ACTIVE_STATUS_FILTER);
     const publicCount = await getCount(
-      "status=eq.approved&public_display_consent=eq.true"
+      `${ACTIVE_STATUS_FILTER}&public_display_consent=eq.true`
     );
-
     let supporters: Awaited<ReturnType<typeof getPublicSupporters>> = [];
 
     try {
@@ -162,7 +159,6 @@ export async function POST(request: Request) {
 
     const ip = getClientIp(request);
     const ipHash = hashIp(ip);
-
     if (!(await verifyTurnstile(payload.turnstileToken, ip))) {
       return NextResponse.json(
         { message: "Nie udało się potwierdzić, że zgłoszenie pochodzi od człowieka." },
@@ -174,7 +170,6 @@ export async function POST(request: Request) {
     const recentCount = await getCount(
       `ip_hash=eq.${encodeURIComponent(ipHash)}&created_at=gte.${fifteenMinutesAgo}`
     );
-
     if (recentCount >= 3) {
       return NextResponse.json(
         { message: "Z tego połączenia wysłano zbyt wiele zgłoszeń. Spróbuj później." },
@@ -194,7 +189,7 @@ export async function POST(request: Request) {
         adult_confirmed: payload.adult,
         public_display_consent: payload.publicDisplay,
         privacy_version: PUBLIC_POSTAL_CODE_PRIVACY_VERSION,
-        status: "pending",
+        status: "approved",
         ip_hash: ipHash,
         user_agent: request.headers.get("user-agent")?.slice(0, 500) || null
       })
@@ -213,7 +208,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({
-      message: "Dziękujemy. Zgłoszenie zapisano i po weryfikacji zostanie doliczone do licznika."
+      message: "Dziękujemy. Twój głos został zapisany i od razu pojawił się na liście poparcia."
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Nie udało się zapisać zgłoszenia.";

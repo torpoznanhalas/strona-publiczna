@@ -21,7 +21,6 @@ function clean(value: unknown, maxLength: number) {
 
 export function parseSupporterPayload(input: unknown): SupporterPayload {
   const data = (input ?? {}) as Record<string, unknown>;
-
   const payload: SupporterPayload = {
     firstName: clean(data.firstName, 80),
     lastInitial: clean(data.lastInitial, 1).toUpperCase(),
@@ -61,6 +60,10 @@ export function parseSupporterPayload(input: unknown): SupporterPayload {
 
   if (!payload.privacy) {
     throw new Error("Zaakceptuj zasady przetwarzania danych.");
+  }
+
+  if (!payload.publicDisplay) {
+    throw new Error("Zgoda na publiczne pokazanie wpisu jest wymagana.");
   }
 
   return payload;

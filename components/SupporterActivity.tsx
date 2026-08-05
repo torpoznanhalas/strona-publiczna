@@ -52,12 +52,18 @@ export function SupporterActivity() {
       }
     };
 
+    const handleSupporterAdded = () => {
+      void load();
+    };
+
     void load();
     const timer = window.setInterval(load, 30000);
+    window.addEventListener("supporter-added", handleSupporterAdded);
 
     return () => {
       active = false;
       window.clearInterval(timer);
+      window.removeEventListener("supporter-added", handleSupporterAdded);
     };
   }, []);
 
@@ -73,7 +79,6 @@ export function SupporterActivity() {
         <div className="supporter-activity-heading">
           <span>Wspiera nas już <strong><SupporterCounter /></strong> osób!</span>
         </div>
-
         <div className="supporter-activity-window">
           <div className="supporter-activity-scroller" aria-live="polite">
             <ol className="supporter-activity-list">
