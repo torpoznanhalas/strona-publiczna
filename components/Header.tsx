@@ -65,7 +65,7 @@ export function Header() {
           aria-label="Główna nawigacja"
         >
           <Link href="/#strona-glowna" onClick={closeMenu}>
-            Strona główna
+            Start
           </Link>
           <Link href="/#nagrania" onClick={closeMenu}>
             Nagrania hałasu
@@ -78,6 +78,9 @@ export function Header() {
           </Link>
           <Link href="/historia" onClick={closeMenu}>
             Historia Toru
+          </Link>
+          <Link href="/zdrowie" onClick={closeMenu}>
+            Zdrowie
           </Link>
           <Link href="/kontakt" onClick={closeMenu}>
             Kontakt
@@ -94,12 +97,10 @@ export function Header() {
           title={darkMode ? "Włącz jasny motyw" : "Włącz ciemny motyw"}
           onClick={toggleTheme}
         >
-          <svg className="theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <svg className="theme-toggle-half-sun" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="4" />
             <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41" />
-          </svg>
-          <svg className="theme-toggle-moon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20.3 15.7A8.5 8.5 0 0 1 8.3 3.7 8.5 8.5 0 1 0 20.3 15.7Z" />
+            <path className="theme-toggle-shade" d="M12 8a4 4 0 0 0 0 8Z" />
           </svg>
         </button>
         <Link className="header-join" href="/#poparcie" onClick={closeMenu}>

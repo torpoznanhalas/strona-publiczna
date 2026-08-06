@@ -6,21 +6,6 @@ import { VideoSection } from "@/components/VideoSection";
 
 const demands = [
   {
-    title: "Stały i niezależny monitoring",
-    description:
-      "Pomiary natężenia hałasu w okolicznych dzielnicach prowadzone przez niezależny system, dostępne publicznie w czasie rzeczywistym."
-  },
-  {
-    title: "Kontrola każdego pojazdu",
-    description:
-      "Bezkompromisowy pomiar głośności w trakcie trwania jazd i wyścigów oraz natychmiastowe, bezwzględne wykluczanie z toru pojazdów przekraczających normy."
-  },
-  {
-    title: "Pilne inwestycje infrastrukturalne",
-    description:
-      "Podwyższenie wałów przy ul. Bukowskiej, usypanie wałów wschodnich (od strony lotniska) oraz montaż odpowiednio sparametryzowanych ekranów akustycznych."
-  },
-  {
     title: "Ochrona poranków i sztywny harmonogram",
     description:
       "Ścisłe ograniczenie jazd do godzin 10.00–16.00 (max. 20 dni w roku). Bezwzględna ochrona godzin porannych dla mieszkańców pracujących zdalnie, freelancerów oraz medyków i pracowników odpoczywających po nocnych dyżurach."
@@ -31,9 +16,24 @@ const demands = [
       "Zakaz hałaśliwych jazd i wyścigów w soboty i niedziele — weekendy to jedyne dni odpoczynku dla tysięcy okolicznych rodzin. Zgadzamy się na 1 weekend jazd w miesiącu, w okresie czerwiec-wrzesień."
   },
   {
+    title: "Pilne inwestycje infrastrukturalne",
+    description:
+      "Podwyższenie wałów przy ul. Bukowskiej, usypanie wałów wschodnich (od strony lotniska) oraz montaż odpowiednio sparametryzowanych ekranów akustycznych."
+  },
+  {
     title: "Równy głos mieszkańców",
     description:
       "Powołanie stałego zespołu konsultacyjnego z równą reprezentacją mieszkańców, samorządu, władz miasta oraz Automobilklubu Wielkopolskiego."
+  },
+  {
+    title: "Kontrola każdego pojazdu",
+    description:
+      "Bezkompromisowy pomiar głośności w trakcie trwania jazd i wyścigów oraz natychmiastowe, bezwzględne wykluczanie z toru pojazdów przekraczających normy."
+  },
+  {
+    title: "Stały i niezależny monitoring",
+    description:
+      "Pomiary natężenia hałasu w okolicznych dzielnicach prowadzone przez niezależny system, dostępne publicznie w czasie rzeczywistym."
   }
 ];
 
