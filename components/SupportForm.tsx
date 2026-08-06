@@ -48,10 +48,9 @@ export function SupportForm() {
       setStatus("success");
       setMessage(
         data.message ||
-          "Dziękujemy. Twój głos został zapisany i od razu pojawił się na liście poparcia."
+          "Dziękujemy. Zgłoszenie zostało zapisane i czeka na zatwierdzenie."
       );
       setForm(initialState);
-      window.dispatchEvent(new Event("supporter-added"));
     } catch (error) {
       setStatus("error");
       setMessage(error instanceof Error ? error.message : "Wystąpił nieoczekiwany błąd.");

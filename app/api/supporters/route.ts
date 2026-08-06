@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const PUBLIC_POSTAL_CODE_PRIVACY_VERSION = "2026-08-04-v2";
-const ACTIVE_STATUS_FILTER = "status=in.(approved,pending)";
+const APPROVED_STATUS_FILTER = "status=eq.approved";
 const LOCAL_PREVIEW_MODE = process.env.LOCAL_PREVIEW_MODE === "true";
 const LOCAL_PREVIEW_COUNT = 128;
 const LOCAL_PREVIEW_MESSAGE =
@@ -121,7 +121,7 @@ function parsePositiveInteger(value: string | null, fallback: number) {
 
 async function getPublicSupporters(limit: number, offset: number) {
   const response = await supabaseAdminFetch(
-    `/supporters?select=first_name,last_initial,city,postal_code,created_at,privacy_version&${ACTIVE_STATUS_FILTER}&public_display_consent=eq.true&order=created_at.desc&offset=${offset}&limit=${limit}`,
+    `/supporters?select=first_name,last_initial,city,postal_code,created_at,privacy_version&${APPROVED_STATUS_FILTER}&public_display_consent=eq.true&order=created_at.desc&offset=${offset}&limit=${limit}`,
     { method: "GET" }
   );
 
@@ -178,8 +178,8 @@ export async function GET(request: Request) {
     }
 
     const [count, publicCount, supporters] = await Promise.all([
-      getCount(ACTIVE_STATUS_FILTER),
-      getCount(`${ACTIVE_STATUS_FILTER}&public_display_consent=eq.true`),
+      getCount(APPROVED_STATUS_FILTER),
+      getCount(`${APPROVED_STATUS_FILTER}&public_display_consent=eq.true`),
       getPublicSupporters(limit, offset).catch(() => [])
     ]);
 
@@ -251,7 +251,7 @@ export async function POST(request: Request) {
         adult_confirmed: payload.adult,
         public_display_consent: payload.publicDisplay,
         privacy_version: PUBLIC_POSTAL_CODE_PRIVACY_VERSION,
-        status: "approved",
+        status: "pending",
         ip_hash: ipHash,
         user_agent: request.headers.get("user-agent")?.slice(0, 500) || null
       })
@@ -270,7 +270,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({
-      message: "Dziękujemy. Twój głos został zapisany i od razu pojawił się na liście poparcia."
+      message: "Dziękujemy. Zgłoszenie zostało zapisane i czeka na zatwierdzenie."
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Nie udało się zapisać zgłoszenia.";
