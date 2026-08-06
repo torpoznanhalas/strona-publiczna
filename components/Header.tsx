@@ -1,17 +1,46 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+
+const THEME_STORAGE_KEY = "tor-poznan-theme";
+
+function subscribeToTheme(callback: () => void) {
+  window.addEventListener("theme-change", callback);
+  return () => window.removeEventListener("theme-change", callback);
+}
+
+function getThemeSnapshot() {
+  return document.documentElement.dataset.theme === "dark";
+}
+
+function getServerThemeSnapshot() {
+  return false;
+}
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const darkMode = useSyncExternalStore(
+    subscribeToTheme,
+    getThemeSnapshot,
+    getServerThemeSnapshot
+  );
   const closeMenu = () => setOpen(false);
+
+  const toggleTheme = () => {
+    const nextTheme = darkMode ? "light" : "dark";
+    document.documentElement.dataset.theme = nextTheme;
+    document.documentElement.style.colorScheme = nextTheme;
+    localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+    window.dispatchEvent(new Event("theme-change"));
+  };
+
   return (
     <header className="header">
       <div className="container header-inner">
         <Link
           className="brand"
-          href="/"
+          href="/#strona-glowna"
           aria-label="Hałas z Toru Poznań — strona główna"
           onClick={closeMenu}
         >
@@ -35,11 +64,14 @@ export function Header() {
           className={`nav${open ? " nav-open" : ""}`}
           aria-label="Główna nawigacja"
         >
-          <Link href="/" onClick={closeMenu}>
+          <Link href="/#strona-glowna" onClick={closeMenu}>
             Strona główna
           </Link>
           <Link href="/#nagrania" onClick={closeMenu}>
             Nagrania hałasu
+          </Link>
+          <Link href="/#postulaty" onClick={closeMenu}>
+            Postulaty
           </Link>
           <Link href="/fakty" onClick={closeMenu}>
             Aktualności
@@ -54,6 +86,22 @@ export function Header() {
             Dołącz się
           </Link>
         </nav>
+        <button
+          className="theme-toggle"
+          type="button"
+          aria-label={darkMode ? "Włącz jasny motyw" : "Włącz ciemny motyw"}
+          aria-pressed={darkMode}
+          title={darkMode ? "Włącz jasny motyw" : "Włącz ciemny motyw"}
+          onClick={toggleTheme}
+        >
+          <svg className="theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41" />
+          </svg>
+          <svg className="theme-toggle-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.3 15.7A8.5 8.5 0 0 1 8.3 3.7 8.5 8.5 0 1 0 20.3 15.7Z" />
+          </svg>
+        </button>
         <Link className="header-join" href="/#poparcie" onClick={closeMenu}>
           Dołącz się
         </Link>

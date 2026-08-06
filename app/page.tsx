@@ -26,9 +26,9 @@ const demands = [
       "Ścisłe ograniczenie jazd do godzin 10.00–16.00 (max. 20 dni w roku). Bezwzględna ochrona godzin porannych dla mieszkańców pracujących zdalnie, freelancerów oraz medyków i pracowników odpoczywających po nocnych dyżurach."
   },
   {
-    title: "Bezwzględna ochrona weekendów",
+    title: "Ścisła ochrona weekendów",
     description:
-      "Całkowity zakaz hałaśliwych jazd i wyścigów w soboty i niedziele — weekendy to jedyne dni pełnej regeneracji i odpoczynku dla tysięcy okolicznych rodzin."
+      "Zakaz hałaśliwych jazd i wyścigów w soboty i niedziele — weekendy to jedyne dni odpoczynku dla tysięcy okolicznych rodzin. Zgadzamy się na 1 weekend jazd w miesiącu, w okresie czerwiec-wrzesień."
   },
   {
     title: "Równy głos mieszkańców",
@@ -40,7 +40,7 @@ const demands = [
 export default function Home() {
   return (
     <SupportersProvider>
-      <section className="hero">
+      <section className="hero" id="strona-glowna">
         <div className="container hero-grid">
           <div className="hero-main">
             <h1>
@@ -87,7 +87,7 @@ export default function Home() {
 
       <section className="section section-dark">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header section-anchor" id="postulaty">
             <h2 className="section-title">
               6. postulatów mieszkańców Ławicy, Osiedla Bajkowego, Przeźmierowa, Woli i Smochowic.
             </h2>

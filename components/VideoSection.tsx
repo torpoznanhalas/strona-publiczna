@@ -2,9 +2,9 @@ import { videos } from "@/content/videos";
 
 export function VideoSection() {
   return (
-    <section className="section recordings-section" id="nagrania">
+    <section className="section recordings-section">
       <div className="container">
-        <div className="section-header recordings-header">
+        <div className="section-header recordings-header section-anchor" id="nagrania">
           <h2 className="section-title recordings-title">
             Posłuchaj nagrań hałasu z Toru Poznań wykonanych na Ławicy, os. Bajkowym,
             w Przeźmierowie, Smochowicach.

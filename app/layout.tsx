@@ -12,6 +12,20 @@ const barlow = Barlow({
   variable: "--font-barlow"
 });
 
+const themeInitializer = `
+  (function () {
+    try {
+      var savedTheme = localStorage.getItem("tor-poznan-theme");
+      var systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var theme = savedTheme === "light" || savedTheme === "dark"
+        ? savedTheme
+        : systemDark ? "dark" : "light";
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.style.colorScheme = theme;
+    } catch (_) {}
+  })();
+`;
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://torpoznanhalas.pl"),
   title: {
@@ -36,14 +50,15 @@ export const metadata: Metadata = {
     locale: "pl_PL",
     url: "https://torpoznanhalas.pl",
     siteName: "Hałas z Toru Poznań",
-    title: "Hałas z Toru Poznań — nagrania, fakty i apel mieszkańców",
+    title: "Posłuchaj nagrań hałasu z Toru Poznań!",
     description:
-      "Posłuchaj nagrań, poznaj fakty i poprzyj apel mieszkańców o przestrzeganie norm hałasu."
+      "Poznaj fakty i historię o torze, zobacz jak Automobilklub Wielkopolski próbuje zmieniać prawo i poprzyj okolicznych mieszkańców!"
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hałas z Toru Poznań — nagrania, fakty i apel mieszkańców",
-    description: "Posłuchaj nagrań, poznaj fakty i poprzyj mieszkańców."
+    title: "Posłuchaj nagrań hałasu z Toru Poznań!",
+    description:
+      "Poznaj fakty i historię o torze, zobacz jak Automobilklub Wielkopolski próbuje zmieniać prawo i poprzyj okolicznych mieszkańców!"
   },
   alternates: {
     canonical: "/"
@@ -52,7 +67,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pl" className={barlow.variable}>
+    <html lang="pl" className={barlow.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitializer }} />
+      </head>
       <body>
         <Header />
         <main>{children}</main>

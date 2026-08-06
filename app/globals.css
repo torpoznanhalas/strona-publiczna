@@ -71,7 +71,9 @@ iframe {
 }
 
 .section[id],
-.history-section[id] {
+.history-section[id],
+.hero[id],
+.section-anchor {
   scroll-margin-top: 92px;
 }
 
@@ -194,6 +196,55 @@ iframe {
   font-size: 0.91rem;
   font-weight: 700;
   text-decoration: none;
+}
+
+.theme-toggle {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--text);
+  background: var(--surface);
+  cursor: pointer;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.theme-toggle-sun {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle-sun {
+  display: block;
+}
+
+html[data-theme="dark"] .theme-toggle-moon {
+  display: none;
 }
 
 
@@ -586,9 +637,9 @@ iframe {
 
 .footer {
   padding: 54px 0;
-  border-top: 1px solid rgba(17, 17, 17, 0.16);
-  color: var(--text);
-  background: var(--background);
+  border-top: 0;
+  color: white;
+  background: var(--dark);
 }
 
 .footer-grid {
@@ -606,7 +657,7 @@ iframe {
 
 .footer p {
   margin: 0;
-  color: var(--muted);
+  color: var(--dark-muted);
   font-size: 0.88rem;
 }
 
@@ -617,7 +668,7 @@ iframe {
 }
 
 .footer-links a {
-  color: var(--text);
+  color: white;
   font-size: 0.88rem;
   font-weight: 700;
 }
@@ -1782,10 +1833,6 @@ h6,
   font-size: 1.12rem;
 }
 
-.recordings-section {
-  scroll-margin-top: 92px;
-}
-
 .recordings-header {
   max-width: 1080px;
 }
@@ -2199,4 +2246,163 @@ h6,
 
 .support-cards-grid .supporter-directory-row {
   min-height: 62px;
+}
+
+/* Motyw wieczorny — spokojna paleta redakcyjna z wysokim kontrastem */
+html[data-theme="dark"] {
+  --background: #121416;
+  --surface: #1b1e21;
+  --text: #f2efe8;
+  --muted: #b9b3a8;
+  --line: #363a3f;
+  --accent: #e35757;
+  --accent-dark: #bd3c3c;
+  --dark: #090a0b;
+  --dark-muted: #b8b3aa;
+}
+
+body,
+.header,
+.footer,
+.form,
+.video-card,
+.demand-card,
+.supporter-activity,
+.supporter-directory,
+.source-card {
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+html[data-theme="dark"] .header {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  background: rgba(18, 20, 22, 0.94);
+}
+
+html[data-theme="dark"] .nav {
+  background: rgba(18, 20, 22, 0.99);
+}
+
+html[data-theme="dark"] .field input,
+html[data-theme="dark"] .field select,
+html[data-theme="dark"] .field textarea,
+html[data-theme="dark"] .supporter-directory-more {
+  border-color: var(--line);
+  color: var(--text);
+  background: #111315;
+}
+
+html[data-theme="dark"] .checkbox,
+html[data-theme="dark"] .prose p,
+html[data-theme="dark"] .prose li,
+html[data-theme="dark"] .supporter-activity-place,
+html[data-theme="dark"] .supporter-directory-row span,
+html[data-theme="dark"] .history-point p {
+  color: #d3cec5;
+}
+
+html[data-theme="dark"] .form-status.error {
+  color: #ffb4b4;
+  border-color: #754343;
+  background: #351d1d;
+}
+
+html[data-theme="dark"] .form-status.success {
+  color: #a9ddb2;
+  border-color: #3f6848;
+  background: #19301f;
+}
+
+html[data-theme="dark"] .history-header {
+  color: var(--text);
+  background: #1b2026;
+}
+
+html[data-theme="dark"] .history-header p,
+html[data-theme="dark"] .history-sources {
+  color: var(--muted);
+}
+
+html[data-theme="dark"] .supporter-activity-placeholder,
+html[data-theme="dark"] .supporter-directory-placeholder {
+  background: #343940;
+}
+
+html[data-theme="dark"] .supporter-directory-scroll {
+  scrollbar-color: #626870 transparent;
+}
+
+html[data-theme="dark"] .button:not(.button-accent):not(.button-ghost) {
+  color: var(--background);
+  background: var(--text);
+}
+
+html[data-theme="dark"] .button:not(.button-accent):not(.button-ghost):hover {
+  background: #d7d2c9;
+}
+
+html[data-theme="dark"] .button-ghost {
+  color: var(--text);
+  background: transparent;
+}
+
+html[data-theme="dark"] .button-ghost:hover {
+  color: var(--background);
+  background: var(--text);
+}
+
+html[data-theme="dark"] .header-join,
+html[data-theme="dark"] .nav-mobile-join {
+  color: white;
+  background: var(--accent);
+}
+
+html[data-theme="dark"] .header-join:hover,
+html[data-theme="dark"] .nav-mobile-join:hover {
+  background: var(--accent-dark);
+}
+
+html[data-theme="dark"] .footer {
+  color: white;
+  background: var(--dark);
+}
+
+html[data-theme="dark"] .footer p {
+  color: var(--dark-muted);
+}
+
+html[data-theme="dark"] .footer-links a {
+  color: white;
+}
+
+@media (max-width: 1000px) {
+  .header-inner {
+    gap: 10px;
+  }
+
+  .menu-toggle {
+    order: 3;
+    margin-left: 0;
+  }
+
+  .theme-toggle {
+    order: 2;
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .header,
+  .footer,
+  .form,
+  .video-card,
+  .demand-card,
+  .supporter-activity,
+  .supporter-directory,
+  .source-card,
+  .theme-toggle {
+    transition: none;
+  }
 }

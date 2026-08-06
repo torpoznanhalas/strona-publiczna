@@ -9,7 +9,7 @@ const initialState = {
   postalCode: "",
   email: "",
   adult: false,
-  privacy: false,
+  privacy: true,
   publicDisplay: true,
   website: ""
 };
