@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
 
@@ -44,7 +45,15 @@ export function Header() {
           aria-label="Hałas z Toru Poznań — strona główna"
           onClick={closeMenu}
         >
-          <span className="brand-mark">●</span>
+          <Image
+            className="brand-logo"
+            src="/logo-transparent.png"
+            width={46}
+            height={46}
+            alt=""
+            priority
+            unoptimized
+          />
           <span>Hałas z Toru Poznań</span>
         </Link>
         <button
@@ -67,20 +76,17 @@ export function Header() {
           <Link href="/#strona-glowna" onClick={closeMenu}>
             Start
           </Link>
-          <Link href="/#nagrania" onClick={closeMenu}>
-            Nagrania hałasu
-          </Link>
-          <Link href="/#postulaty" onClick={closeMenu}>
-            Postulaty
-          </Link>
           <Link href="/fakty" onClick={closeMenu}>
             Aktualności
           </Link>
           <Link href="/historia" onClick={closeMenu}>
-            Historia Toru
+            Historia Toru Poznań
           </Link>
           <Link href="/zdrowie" onClick={closeMenu}>
             Zdrowie
+          </Link>
+          <Link href="/#postulaty" onClick={closeMenu}>
+            Postulaty
           </Link>
           <Link href="/kontakt" onClick={closeMenu}>
             Kontakt

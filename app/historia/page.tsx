@@ -36,70 +36,73 @@ export default function HistoryPage() {
           </div>
           <div
             className="history-timeline-scroll"
-            role="region"
-            aria-label="Przewijana oś czasu historii Toru Poznań"
-            tabIndex={0}
+            aria-label="Pionowa oś czasu historii Toru Poznań"
           >
             <div className="history-timeline">
               <PolishTypography>
                 <article className="history-point">
-                <span className="history-dot history-dot-blue" aria-hidden="true" />
-                <h3>LATA 60.</h3>
-                <p>Powstają pierwsze domy w bezpośrednim sąsiedztwie terenu, na którym dziś leży tor.</p>
+                  <span className="history-dot history-dot-blue" aria-hidden="true" />
+                  <h3>LATA 30.</h3>
+                  <p>Przeźmierowo zostaje rozparcelowane pod osiedle-ogród (1933 r.). Pierwsze wille powstają jeszcze przed wojną. Stara Ławica rozbudowuje się.</p>
                 </article>
                 <article className="history-point">
-                <span className="history-dot history-dot-blue" aria-hidden="true" />
-                <h3>1977</h3>
-                <p>Na osiedlach Ławica i Wola oraz w Przeźmierowie mieszka już <strong>ponad 4 600 osób.</strong> W tym samym roku kończy się budowa <strong>toru doświadczalnego</strong> fabryki Polmo — nie toru wyścigowego.</p>
+                  <span className="history-dot history-dot-blue" aria-hidden="true" />
+                  <h3>LATA 60.</h3>
+                  <p>Kolejne domy powstają w bezpośrednim sąsiedztwie terenu, na którym dziś leży tor. Od 1968 r. wzdłuż ulicy Bukowskiej buduje się Osiedle Bajkowe, intensywnie rozrastają się Smochowice i Wola, istniejące już dużo wcześniej. Do 1976 r. ukształtowała się już tu docelowa siatka ulic i zabudowań.</p>
                 </article>
                 <article className="history-point history-point-alert">
-                <span className="history-dot history-dot-red" aria-hidden="true" />
-                <h3>PRZEŁOM LAT 70. I 80.</h3>
-                <p>Tor doświadczalny zostaje przekształcony w tor wyścigowy — <strong>bez pozwolenia na budowę.</strong> Sam twórca toru nazwał go później „dziką inwestycją”.</p>
-                </article>
-                <article className="history-point history-point-alert">
-                <span className="history-dot history-dot-red" aria-hidden="true" />
-                <h3>LATA 80.</h3>
-                <p>Budową toru zajmują się <strong>NIK i prokuratura.</strong> Stan wojenny przerywa postępowanie — nikt nie ponosi odpowiedzialności.</p>
-                </article>
-                <article className="history-point history-point-alert">
-                <span className="history-dot history-dot-red" aria-hidden="true" />
-                <h3>OD 2012 ROKU</h3>
-                <p>Nasilenie zawodów i treningów emitujących hałas sięgający 60-70dB, trwający godzinami, przez wiele dni roku.</p>
+                  <span className="history-dot history-dot-red" aria-hidden="true" />
+                  <h3>1975</h3>
+                  <p>W maju rusza budowa toru — pół roku przed wykonaniem projektu i bez pozwolenia na budowę. Formalnie to „tor doświadczalny” dla tarpanów z Polmo.</p>
                 </article>
                 <article className="history-point">
-                <span className="history-dot history-dot-blue" aria-hidden="true" />
-                <h3>2021 ROK</h3>
-                <p>WIOŚ nakazuje Automobilklubowi Wielkopolskiemu wyciszenie toru lub dostosowanie jego eksploatacji do przepisów prawa.</p>
+                  <span className="history-dot history-dot-blue" aria-hidden="true" />
+                  <h3>1977</h3>
+                  <p>Wokół przyszłego toru mieszka już ponad 5000 osób (samo Przeźmierowo: ponad 2600). W grudniu następuje otwarcie toru — od pierwszego dnia służy wyścigom, nie testom.</p>
                 </article>
                 <article className="history-point history-point-alert">
-                <span className="history-dot history-dot-red" aria-hidden="true" />
-                <h3>PAŹDZIERNIK 2023</h3>
-                <p>Wobec bezczynności Automobilklubu Wielkopolskiego, WIOŚ wydaje nakaz wstrzymania użytkowania toru, po tym jak 31 lipca 2023 mija termin na usunięcie naruszeń akustycznych.</p>
+                  <span className="history-dot history-dot-red" aria-hidden="true" />
+                  <h3>LATA 80.</h3>
+                  <p>Nielegalną budową toru interesuje się Prokuratura Generalna. Twórca toru Andrzej Bobiński przyznał po latach, że budował go „częściowo jako dziką inwestycję”<sup>*</sup>.</p>
                 </article>
                 <article className="history-point history-point-alert">
-                <span className="history-dot history-dot-red" aria-hidden="true" />
-                <h3>JESIEŃ 2023</h3>
-                <p>Automobilklub Wielkopolski odwołuje się od decyzji zaskarżając ją do GIOŚ, i dalej organizuje hałaśliwe zawody i jazdy.</p>
+                  <span className="history-dot history-dot-red" aria-hidden="true" />
+                  <h3>2001–2005</h3>
+                  <p>Pojawiają się pierwsze skargi mieszkańców na hałas (2001). Miasto ustala normy: 50–55 dB (2005). Kontrole wykazują przekroczenia.</p>
                 </article>
                 <article className="history-point">
-                <span className="history-dot history-dot-blue" aria-hidden="true" />
-                <h3>2026</h3>
-                <p>Główny Inspektor Ochrony Środowiska nakazuje zamknięcie toru za <strong>przekraczanie norm hałasu.</strong></p>
+                  <span className="history-dot history-dot-blue" aria-hidden="true" />
+                  <h3>2007</h3>
+                  <p>Po wieloletnich konfliktach i protestach mieszkańców na torze, u prezydenta Grobelnego zapada długo wypracowywany kompromis z Automobilklubem: jazdy z hałasem jeden weekend w miesiącu i do 20 dni roboczych w roku, w godz. 10–16, pod stałym monitoringiem, z kontrolą wydechów i niezbędnymi inwestycjami infrastrukturalnymi (wały od strony wschodniej, podniesienie wałów od strony Bukowskiej, profesjonalne ekranowanie toru). Nastaje względny spokój i długo wyczekiwana koegzystencja.</p>
                 </article>
                 <article className="history-point history-point-alert">
-                <span className="history-dot history-dot-red" aria-hidden="true" />
-                <h3>15 LIPCA 2026</h3>
-                <p>Wybrani posłowie lobbują ustawę, która ma <strong>wyłączyć tory spod kontroli hałasu</strong> — wbrew unijnej dyrektywie 2002/49/WE i mimo zastrzeżeń Ministerstwa Klimatu i Środowiska.</p>
+                  <span className="history-dot history-dot-red" aria-hidden="true" />
+                  <h3>2018</h3>
+                  <p>Nowe władze Automobilklubu łamią wynegocjowany kompromis: liczba jazd zostaje zwielokrotniona, a normy hałasu są nagminnie przekraczane.</p>
+                </article>
+                <article className="history-point">
+                  <span className="history-dot history-dot-blue" aria-hidden="true" />
+                  <h3>2021 ROK</h3>
+                  <p>WIOŚ nakazuje Automobilklubowi Wielkopolskiemu wyciszenie toru lub dostosowanie jego eksploatacji do przepisów prawa.</p>
+                </article>
+                <article className="history-point history-point-alert">
+                  <span className="history-dot history-dot-red" aria-hidden="true" />
+                  <h3>2024–2026</h3>
+                  <p>WIOŚ wstrzymuje działalność toru (31.10.2024) z uwagi na łamanie norm hałasu. GIOŚ utrzymuje decyzję (31.03.2026). Tor działa tylko warunkowo — do wyroku sądu.</p>
+                </article>
+                <article className="history-point history-point-alert">
+                  <span className="history-dot history-dot-red" aria-hidden="true" />
+                  <h3>15 LIPCA 2026</h3>
+                  <p>Wybrani posłowie lobbują ustawę, która ma wyłączyć tory spod kontroli hałasu — wbrew unijnej dyrektywie 2002/49/WE i mimo zastrzeżeń Ministerstwa Klimatu i Środowiska.</p>
                 </article>
               </PolishTypography>
             </div>
           </div>
+          <p className="history-sources"><sup>*</sup> F. Czekała, „Miasto nie do Poznania”, s. 267. A. Bobiński był ówczesnym dyrektorem FSR Polmo i prezesem Automobilklubu Wielkopolskiego.</p>
           <div className="history-conclusion">
             <strong>To nie mieszkańcy sprowadzili się do toru.</strong>
             <span>To tor powstał wśród mieszkańców — bez pozwolenia na budowę.</span>
           </div>
-          <p className="history-sources">Źródła: dane meldunkowe, raport NIK, F. Czekała „Miasto nie do Poznania” | Stowarzyszenie Ławica-Bajkowe</p>
         </div>
       </section>
     </>

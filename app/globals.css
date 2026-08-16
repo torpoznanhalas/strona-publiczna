@@ -174,16 +174,19 @@ iframe {
 
 .brand {
   display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
   font-size: 1.04rem;
   font-weight: 800;
   letter-spacing: normal;
   text-decoration: none;
 }
 
-.brand-mark {
-  color: var(--accent);
+.brand-logo {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  object-fit: contain;
 }
 
 .nav {
@@ -988,49 +991,46 @@ h6,
 }
 
 .history-timeline-scroll {
-  overflow-x: auto;
-  padding-bottom: 18px;
-  overscroll-behavior-inline: contain;
-  scroll-snap-type: inline proximity;
-  scrollbar-gutter: stable;
-}
-
-.history-timeline-scroll:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 4px;
+  overflow: visible;
 }
 
 .history-timeline {
   position: relative;
   display: grid;
-  width: max-content;
-  min-width: 100%;
-  grid-template-columns: repeat(10, minmax(200px, 226px));
-  gap: 24px;
-  padding: 30px 4px 8px;
+  width: min(100%, 940px);
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+  padding: 4px 0 4px 56px;
 }
 
 .history-timeline::before {
   content: "";
   position: absolute;
-  top: 43px;
-  left: 18px;
-  right: 18px;
-  height: 4px;
+  top: 18px;
+  bottom: 18px;
+  left: 13px;
+  width: 3px;
   background: #18304f;
 }
 
 .history-point {
   position: relative;
-  padding-top: 36px;
-  scroll-snap-align: start;
+  padding: 22px 24px 24px;
+  border: 1px solid var(--line);
+  border-left: 5px solid #18304f;
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.history-point-alert {
+  border-left-color: #c83b2e;
 }
 
 .history-dot {
   position: absolute;
   z-index: 1;
-  top: 0;
-  left: 0;
+  top: 18px;
+  left: -56px;
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -1058,8 +1058,14 @@ h6,
 .history-point p {
   margin: 0;
   color: #3d3a36;
-  font-size: 1.28rem;
-  line-height: 1.48;
+  font-size: clamp(1rem, 1.8vw, 1.18rem);
+  font-weight: 700;
+  line-height: 1.58;
+}
+
+.history-point sup,
+.history-sources sup {
+  color: var(--accent);
 }
 
 .history-conclusion {
@@ -1083,7 +1089,8 @@ h6,
 }
 
 .history-sources {
-  margin: 16px 0 0;
+  max-width: 940px;
+  margin: 18px 0 0 56px;
   color: #8f8b85;
   font-size: 0.85rem;
   font-weight: 500;
@@ -1175,6 +1182,30 @@ h6,
   .history-conclusion {
     margin-top: 42px;
     padding: 22px 18px;
+  }
+
+  .history-timeline {
+    gap: 18px;
+    padding-left: 42px;
+  }
+
+  .history-timeline::before {
+    left: 10px;
+  }
+
+  .history-point {
+    padding: 18px 18px 20px;
+  }
+
+  .history-dot {
+    top: 17px;
+    left: -42px;
+    width: 23px;
+    height: 23px;
+  }
+
+  .history-sources {
+    margin-left: 42px;
   }
 }
 

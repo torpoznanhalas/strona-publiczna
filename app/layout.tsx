@@ -62,6 +62,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/"
+  },
+  icons: {
+    icon: [{ url: "/logo-transparent.png", type: "image/png" }],
+    apple: [{ url: "/logo-transparent.png", type: "image/png" }]
   }
 };
 

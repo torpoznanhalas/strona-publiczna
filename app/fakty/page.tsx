@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Fakty o hałasie z Toru Poznań",
   description:
-    "Chronologia decyzji GIOŚ, wstrzymania jej wykonania i prac nad zmianą zasad dotyczących homologowanych torów sportów motorowych."
+    "Chronologia decyzji GIOŚ, wstrzymania jej wykonania oraz prac nad zmianą zasad dotyczących homologowanych torów sportów motorowych — wraz z wycofaniem projektu z procedowania."
 };
 
 export default function FactsPage() {
@@ -25,6 +25,40 @@ export default function FactsPage() {
           </div>
 
           <div className="timeline">
+            <article className="timeline-item">
+              <div className="timeline-date">7 SIERPNIA 2026</div>
+              <div>
+                <h3>Projekt wyłączający obiekty sportowe spod norm hałasu zostaje wycofany z procedowania.</h3>
+                <p>
+                  Według opublikowanego tego dnia artykułu Ministerstwo Klimatu i Środowiska
+                  zwróciło się do marszałka Sejmu o wycofanie projektu z obrad. Projekt był już
+                  w trakcie uchwalania i miał obejmować między innymi Tor Poznań.
+                </p>
+                <p>
+                  Jednocześnie ministerstwo przedstawiło własną propozycję. Zamiast wyłączenia
+                  takich obiektów spod norm hałasu miałaby ona wprowadzić obowiązek uzyskiwania
+                  decyzji środowiskowych.
+                </p>
+                <p>
+                  Wycofanie projektu nie kończy sporu. Cytowani w artykule posłowie zapowiadają
+                  dalsze działania na rzecz utrzymania toru, wskazując na czasowe wstrzymanie
+                  wykonania decyzji i wieloletni czas oczekiwania na decyzje środowiskowe.
+                  Automobilklub deklaruje natomiast ograniczanie hałasu, ale twierdzi, że pełne
+                  dotrzymanie obecnych norm wymagałoby rozwiązań trudnych lub niemożliwych do
+                  pogodzenia z funkcjonowaniem toru.
+                </p>
+                <p className="timeline-source">
+                  <a
+                    href="https://gloswielkopolski.pl/tor-poznan-znowu-blisko-zamkniecia-kluczowa-ustawa-zablokowana-w-sejmie-to-wydluzy-proces-o-nawet-6-lat/ar/c1p2-29239371"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Źródło: „Głos Wielkopolski”, 7 sierpnia 2026 r.
+                  </a>
+                </p>
+              </div>
+            </article>
+
             <article className="timeline-item">
               <div className="timeline-date">15 LIPCA 2026</div>
               <div>
@@ -205,7 +239,10 @@ export default function FactsPage() {
             </p>
             <p>
               Pomagano zatrzymać wykonanie decyzji, rozpoczęto rozmowy o podniesieniu
-              dopuszczalnego poziomu i skierowano do Sejmu projekt zmieniający zasady.
+              dopuszczalnego poziomu i skierowano do Sejmu projekt zmieniający zasady. Po przyjęciu
+              projektu przez komisję został on jednak 7 sierpnia 2026 r. wycofany z procedowania.
+              Ministerstwo Klimatu i Środowiska przedstawiło alternatywę opartą na obowiązku
+              uzyskania decyzji środowiskowych.
             </p>
             <p className="mechanism-summary-final">
               Stawką nie jest istnienie sportu motorowego. Stawką jest to, czy Tor Poznań ma
