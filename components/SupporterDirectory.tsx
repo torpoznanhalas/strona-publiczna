@@ -38,6 +38,7 @@ function mergeUnique(first: PublicSupporter[], second: PublicSupporter[]) {
 export function SupporterDirectory() {
   const {
     data,
+    displayCount,
     loading: initialLoading,
     error: initialError
   } = useSupporters();
@@ -121,7 +122,7 @@ export function SupporterDirectory() {
           <h3>Osoby, które dołączyły</h3>
         </div>
         <span className="supporter-directory-count">
-          {data ? publicCount : "—"}
+          {data ? publicCount : displayCount}
         </span>
       </div>
       <div

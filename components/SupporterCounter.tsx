@@ -8,10 +8,8 @@ type CounterProps = {
 };
 
 export function SupporterCounter({ large = false, className = "" }: CounterProps) {
-  const { data } = useSupporters();
-  const count = data ? Number(data.publicCount ?? data.count) || 0 : null;
-
-  const text = count === null ? "—" : new Intl.NumberFormat("pl-PL").format(count);
+  const { displayCount } = useSupporters();
+  const text = new Intl.NumberFormat("pl-PL").format(displayCount);
 
   if (large) {
     return <span className={`support-big-number ${className}`}>{text}</span>;

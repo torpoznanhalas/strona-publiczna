@@ -195,12 +195,12 @@ export async function GET(request: Request) {
   } catch {
     return NextResponse.json(
       {
-        count: 0,
-        publicCount: 0,
-        supporters: [],
-        hasMore: false
+        message: "Nie udało się pobrać listy osób wspierających."
       },
-      { status: 200 }
+      {
+        status: 503,
+        headers: { "Cache-Control": "no-store" }
+      }
     );
   }
 }
