@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { trackMetaLead } from "@/components/MetaPixel";
 
 const initialState = {
   firstName: "",
@@ -46,6 +47,7 @@ export function SupportForm() {
       }
 
       setStatus("success");
+      trackMetaLead();
       setMessage(
         data.message ||
           "Dziękujemy. Zgłoszenie zostało zapisane i czeka na zatwierdzenie."

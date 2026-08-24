@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PrivacySettingsButton } from "@/components/PrivacySettingsButton";
 
 export function Footer() {
   return (
@@ -19,6 +20,7 @@ export function Footer() {
           <Link href="/fakty">Fakty</Link>
           <Link href="/historia">Historia Toru Poznań</Link>
           <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
+          <PrivacySettingsButton />
           <Link href="/kontakt">Kontakt</Link>
         </div>
       </div>

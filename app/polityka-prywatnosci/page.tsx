@@ -12,7 +12,7 @@ export default function PrivacyPage() {
           <p className="eyebrow">Dane osobowe</p>
           <h1>Polityka prywatności.</h1>
           <p className="section-lead">
-            Wersja z 4 sierpnia 2026 r. Zakres publicznie prezentowanych danych zależy od zgody
+            Wersja z 24 sierpnia 2026 r. Zakres publicznie prezentowanych danych zależy od zgody
             zaznaczonej w formularzu poparcia.
           </p>
         </div>
@@ -58,7 +58,9 @@ export default function PrivacyPage() {
           <p>
             Dane mogą być przetwarzane przez dostawców hostingu, bazy danych, zabezpieczeń formularza
             i poczty elektronicznej działających na zlecenie Administratora. W obecnej konfiguracji są to
-            w szczególności Netlify i Supabase. Przed uruchomieniem produkcyjnym lista dostawców,
+            w szczególności Netlify i Supabase. Po wyrażeniu odrębnej zgody na pomiar odbiorcą
+            danych technicznych jest także Meta Platforms Ireland Limited w związku z działaniem
+            Piksela Meta. Przed uruchomieniem produkcyjnym lista dostawców,
             lokalizacja danych i mechanizmy ewentualnego przekazywania danych poza Europejski Obszar
             Gospodarczy zostaną ostatecznie zweryfikowane i uzupełnione.
           </p>
@@ -87,10 +89,20 @@ export default function PrivacyPage() {
 
           <h2>9. Pliki cookies i statystyka</h2>
           <p>
-            Pierwsza wersja strony nie korzysta z reklamowych narzędzi śledzących ani analityki
-            marketingowej. Osadzone filmy YouTube są ładowane z domeny zwiększającej prywatność
-            dopiero po wejściu użytkownika w sekcję z nagraniem. Zakres danych technicznych może
-            zależeć od działania zewnętrznego odtwarzacza.
+            Piksel Meta uruchamiamy wyłącznie po dobrowolnym wyrażeniu odrębnej zgody. Służy on do
+            pomiaru odwiedzin strony oraz skutecznych zapisów na listę wsparcia. Do Meta nie
+            przekazujemy imienia, nazwiska, adresu e-mail, miejscowości ani kodu pocztowego podanych
+            w formularzu. Meta może otrzymać adres odwiedzanej strony, czas zdarzenia oraz dane
+            techniczne przeglądarki i połączenia, a także zapisać identyfikatory takie jak _fbp lub
+            _fbc. Identyfikatory te są co do zasady przechowywane do 90 dni. Decyzję zapisujemy
+            lokalnie w przeglądarce do czasu jej zmiany.
+          </p>
+          <p>
+            Zgodę można w każdej chwili udzielić albo wycofać przyciskiem „Ustawienia prywatności”
+            w stopce. Wycofanie zgody blokuje dalsze zdarzenia Piksela Meta i usuwa dostępne dla
+            strony identyfikatory Meta. Osadzone filmy YouTube są ładowane z domeny zwiększającej
+            prywatność dopiero po wejściu użytkownika w sekcję z nagraniem. Zakres danych
+            technicznych może zależeć od działania zewnętrznego odtwarzacza.
           </p>
         </div>
       </div>

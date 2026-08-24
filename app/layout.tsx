@@ -3,6 +3,7 @@ import { Barlow } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { MetaPixel } from "@/components/MetaPixel";
 
 const barlow = Barlow({
   subsets: ["latin", "latin-ext"],
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         <main>{children}</main>
         <Footer />
+        <MetaPixel />
       </body>
     </html>
   );
