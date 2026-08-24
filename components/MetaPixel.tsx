@@ -73,6 +73,7 @@ export function MetaPixel() {
   const [consent, setConsent] = useState<Consent | null>(null);
   const [ready, setReady] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [measurementEnabled, setMeasurementEnabled] = useState(false);
 
   useEffect(() => {
     const initialize = window.setTimeout(() => {
@@ -80,7 +81,10 @@ export function MetaPixel() {
       setReady(true);
     }, 0);
 
-    const openSettings = () => setSettingsOpen(true);
+    const openSettings = () => {
+      setMeasurementEnabled(readConsent() === "granted");
+      setSettingsOpen(true);
+    };
     window.addEventListener(META_CONSENT_OPEN_EVENT, openSettings);
     return () => {
       window.clearTimeout(initialize);
@@ -111,22 +115,75 @@ export function MetaPixel() {
 
   return (
     <aside className="meta-consent" role="dialog" aria-modal="true" aria-labelledby="meta-consent-title">
-      <div className="meta-consent-copy">
-        <h2 id="meta-consent-title">Czy zgadzasz się na pomiar Meta?</h2>
-        <p>
-          Po Twojej zgodzie uruchomimy Piksel Meta, aby mierzyć odwiedziny i skuteczne zapisy na
-          listę wsparcia. Nie przekazujemy Meta danych wpisanych w formularzu. Więcej informacji
-          znajdziesz w <Link href="/polityka-prywatnosci">polityce prywatności</Link>.
-        </p>
-      </div>
-      <div className="meta-consent-actions">
-        <button className="button button-ghost" type="button" onClick={() => saveConsent("denied")}>
-          Nie zgadzam się
-        </button>
-        <button className="button button-accent" type="button" onClick={() => saveConsent("granted")}>
-          Zgadzam się
-        </button>
-      </div>
+      {settingsOpen ? (
+        <div className="meta-consent-settings">
+          <div className="meta-consent-copy">
+            <h2 id="meta-consent-title">Dostosuj pliki cookie</h2>
+            <p>
+              Niezbędne pliki cookie i pamięć przeglądarki umożliwiają podstawowe działanie strony.
+              Dodatkowy pomiar uruchomimy wyłącznie wtedy, gdy go włączysz.
+            </p>
+          </div>
+          <div className="meta-consent-option" aria-disabled="true">
+            <span>
+              <strong>Niezbędne</strong>
+              <small>Zawsze aktywne</small>
+            </span>
+            <span className="meta-consent-required">Włączone</span>
+          </div>
+          <label className="meta-consent-option">
+            <span>
+              <strong>Pomiar i promocja inicjatywy</strong>
+              <small>Pomagają sprawdzać skuteczność strony i docierać do innych mieszkańców.</small>
+            </span>
+            <input
+              type="checkbox"
+              checked={measurementEnabled}
+              onChange={(event) => setMeasurementEnabled(event.target.checked)}
+            />
+          </label>
+          <div className="meta-consent-settings-footer">
+            <Link href="/polityka-prywatnosci">Dowiedz się więcej</Link>
+            <button
+              className="button meta-consent-save"
+              type="button"
+              onClick={() => saveConsent(measurementEnabled ? "granted" : "denied")}
+            >
+              Zapisz wybór
+            </button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="meta-consent-copy">
+            <h2 id="meta-consent-title">Pomóż nam dotrzeć do innych mieszkańców</h2>
+            <p>
+              Za Twoją zgodą użyjemy dodatkowych plików cookie, aby mierzyć skuteczność strony i
+              docierać z informacją o inicjatywie do innych osób, którym również przeszkadza hałas.
+              Nie przekazujemy danych wpisanych w formularzu. Będziemy bardzo wdzięczni za Twoje
+              wsparcie. <Link href="/polityka-prywatnosci">Dowiedz się więcej</Link>.
+            </p>
+          </div>
+          <div className="meta-consent-actions">
+            <button
+              className="button meta-consent-customize"
+              type="button"
+              onClick={() => {
+                setMeasurementEnabled(false);
+                setSettingsOpen(true);
+              }}
+            >
+              Dostosuj
+            </button>
+            <button className="button meta-consent-essential" type="button" onClick={() => saveConsent("denied")}>
+              Tylko niezbędne
+            </button>
+            <button className="button meta-consent-accept" type="button" onClick={() => saveConsent("granted")}>
+              Akceptuję
+            </button>
+          </div>
+        </>
+      )}
     </aside>
   );
 }

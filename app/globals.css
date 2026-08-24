@@ -685,13 +685,13 @@ iframe {
   position: fixed;
   z-index: 100;
   right: 20px;
-  bottom: 20px;
+  bottom: clamp(64px, 10vh, 120px);
   left: 20px;
   display: flex;
-  max-width: 920px;
-  padding: 24px;
+  max-width: 1040px;
+  padding: 26px;
   margin: 0 auto;
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 22px;
   align-items: center;
   justify-content: space-between;
@@ -702,7 +702,7 @@ iframe {
 }
 
 .meta-consent-copy {
-  max-width: 600px;
+  max-width: 620px;
 }
 
 .meta-consent h2 {
@@ -724,6 +724,8 @@ iframe {
 .meta-consent-actions {
   display: flex;
   flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 10px;
 }
 
@@ -732,15 +734,82 @@ iframe {
   padding: 11px 17px;
 }
 
-.meta-consent .button-ghost {
+.meta-consent-customize,
+.meta-consent-essential,
+.meta-consent-save {
   border-color: rgba(255, 255, 255, 0.72);
   color: white;
+  background: transparent;
+}
+
+.meta-consent-customize:hover,
+.meta-consent-essential:hover,
+.meta-consent-save:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.meta-consent-accept {
+  border-color: #2f925d;
+  background: #2f925d;
+}
+
+.meta-consent-accept:hover {
+  background: #24784b;
+}
+
+.meta-consent-settings {
+  width: 100%;
+}
+
+.meta-consent-settings .meta-consent-copy {
+  max-width: none;
+  margin-bottom: 18px;
+}
+
+.meta-consent-option {
+  display: flex;
+  padding: 14px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.meta-consent-option span:first-child {
+  display: grid;
+  gap: 3px;
+}
+
+.meta-consent-option small {
+  color: var(--dark-muted);
+  line-height: 1.4;
+}
+
+.meta-consent-option input {
+  width: 22px;
+  height: 22px;
+  accent-color: #2f925d;
+}
+
+.meta-consent-required {
+  color: #84d6a9;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.meta-consent-settings-footer {
+  display: flex;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 @media (max-width: 760px) {
   .meta-consent {
     right: 12px;
-    bottom: 12px;
+    bottom: 28px;
     left: 12px;
     padding: 20px;
     align-items: stretch;
@@ -750,6 +819,15 @@ iframe {
   .meta-consent-actions {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .meta-consent-accept {
+    grid-row: 1;
+  }
+
+  .meta-consent-settings-footer {
+    align-items: stretch;
+    flex-direction: column;
   }
 }
 
