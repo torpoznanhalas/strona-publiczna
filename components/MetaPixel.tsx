@@ -175,9 +175,6 @@ export function MetaPixel() {
             >
               Dostosuj
             </button>
-            <button className="button meta-consent-essential" type="button" onClick={() => saveConsent("denied")}>
-              Tylko niezbędne
-            </button>
             <button className="button meta-consent-accept" type="button" onClick={() => saveConsent("granted")}>
               Akceptuję
             </button>

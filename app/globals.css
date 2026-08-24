@@ -735,7 +735,6 @@ iframe {
 }
 
 .meta-consent-customize,
-.meta-consent-essential,
 .meta-consent-save {
   border-color: rgba(255, 255, 255, 0.72);
   color: white;
@@ -743,7 +742,6 @@ iframe {
 }
 
 .meta-consent-customize:hover,
-.meta-consent-essential:hover,
 .meta-consent-save:hover {
   background: rgba(255, 255, 255, 0.12);
 }
