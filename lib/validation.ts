@@ -1,3 +1,5 @@
+import { AnalyticsContext, parseAnalyticsContext } from "@/lib/analytics";
+
 export type SupporterPayload = {
   firstName: string;
   lastInitial: string;
@@ -9,6 +11,7 @@ export type SupporterPayload = {
   publicDisplay: boolean;
   website?: string;
   turnstileToken?: string;
+  analyticsContext?: AnalyticsContext;
 };
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -21,6 +24,7 @@ function clean(value: unknown, maxLength: number) {
 
 export function parseSupporterPayload(input: unknown): SupporterPayload {
   const data = (input ?? {}) as Record<string, unknown>;
+  const analyticsContext = parseAnalyticsContext(data);
   const payload: SupporterPayload = {
     firstName: clean(data.firstName, 80),
     lastInitial: clean(data.lastInitial, 1).toUpperCase(),
@@ -31,7 +35,8 @@ export function parseSupporterPayload(input: unknown): SupporterPayload {
     privacy: data.privacy === true,
     publicDisplay: data.publicDisplay === true,
     website: clean(data.website, 160),
-    turnstileToken: clean(data.turnstileToken, 2048)
+    turnstileToken: clean(data.turnstileToken, 2048),
+    analyticsContext: analyticsContext || undefined
   };
 
   if (payload.firstName.length < 2) {

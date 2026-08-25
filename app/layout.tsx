@@ -4,6 +4,9 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MetaPixel } from "@/components/MetaPixel";
+import { AnalyticsTracker } from "@/components/AnalyticsTracker";
+import { Suspense } from "react";
+import { SupportersProvider } from "@/components/SupportersProvider";
 
 const barlow = Barlow({
   subsets: ["latin", "latin-ext"],
@@ -72,14 +75,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pl" className={barlow.variable} suppressHydrationWarning>
+    <html
+      lang="pl"
+      className={barlow.variable}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitializer }} />
       </head>
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <SupportersProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </SupportersProvider>
+        <Suspense fallback={null}>
+          <AnalyticsTracker />
+        </Suspense>
         <MetaPixel />
       </body>
     </html>

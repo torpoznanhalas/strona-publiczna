@@ -1,7 +1,5 @@
-import { SupporterActivity } from "@/components/SupporterActivity";
 import { SupporterDirectory } from "@/components/SupporterDirectory";
 import { SupportForm } from "@/components/SupportForm";
-import { SupportersProvider } from "@/components/SupportersProvider";
 import { VideoSection } from "@/components/VideoSection";
 
 const demands = [
@@ -39,44 +37,53 @@ const demands = [
 
 export default function Home() {
   return (
-    <SupportersProvider>
+    <>
       <section className="hero" id="strona-glowna">
         <div className="container hero-grid">
           <div className="hero-main">
             <h1>
-              Tor Poznań od lat przekracza normy hałasu, szkodząc zdrowiu tysięcy poznaniaków.{" "}
+              Nie chcemy likwidacji Toru Poznań.{" "}
               <span className="hero-highlight">
-                Posłuchaj, poznaj fakty, poprzyj mieszkańców.
+                Chcemy, by działał zgodnie z normami i pozwalał mieszkańcom normalnie żyć i
+                odpoczywać.
               </span>
             </h1>
             <p className="hero-description">
-              GIOŚ nakazał wstrzymanie użytkowania Toru Poznań, ale wykonanie decyzji zawieszono, a w Sejmie – przy wsparciu wybranych posłów – trwa
-               próba napisania ustawy pod Automobilklub Wielkopolski i wyłączenia obiektu spod prawa. Żądamy ukrócenia tych patologicznych układów,
-              wyegzekwowania norm hałasu, profesjonalnego wyciszenia toru i ograniczenia jazd w imię ochrony zdrowia mieszkańców.
-              Nie żądamy likwidacji Toru Poznań – żądamy praworządności.
+              Kontrole WIOŚ potwierdziły wielokrotne przekroczenia dopuszczalnych poziomów hałasu
+              na Torze Poznań. Domagamy się skutecznego wyciszenia toru, przestrzegania norm i
+              przewidywalnych zasad jego funkcjonowania. Jeśli popierasz te postulaty — dołącz do
+              apelu mieszkańców.
             </p>
             <div className="button-row hero-buttons">
-              <a className="button button-accent" href="#nagrania">
-                Posłuchaj nagrań
+              <a className="button button-accent hero-primary-cta" href="#poparcie">
+                Popieram te postulaty
               </a>
-              <a className="button button-ghost" href="#poparcie">
-                Poprzyj mieszkańców
+              <a className="button button-ghost" href="#nagrania">
+                Posłuchaj nagrań
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      <SupporterActivity />
-
       <VideoSection />
 
-      <section className="section support-section" id="poparcie">
+      <section className="section support-section">
         <div className="container">
-          <div className="support-section-header">
+          <div className="support-section-header section-anchor" id="poparcie">
             <h2 className="section-title">
-              Wyraź poparcie dla przestrzegania norm hałasu przez Tor Poznań.
+              Poprzyj apel mieszkańców
             </h2>
+          </div>
+          <div className="support-decision-box">
+            <p>
+              Popierając apel, nie opowiadasz się za likwidacją Toru Poznań. Popierasz
+              przestrzeganie norm hałasu, skuteczne zabezpieczenia akustyczne, przewidywalne
+              zasady funkcjonowania toru i udział mieszkańców w podejmowanych decyzjach.
+            </p>
+            <a className="support-demands-link" href="#postulaty">
+              Poznaj wszystkie postulaty <span aria-hidden="true">→</span>
+            </a>
           </div>
           <div className="support-cards-grid">
             <SupportForm />
@@ -108,6 +115,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </SupportersProvider>
+    </>
   );
 }

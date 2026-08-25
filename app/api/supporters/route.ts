@@ -2,6 +2,7 @@ import { createHash } from "crypto";
 import { NextResponse } from "next/server";
 import { parseExactCount, supabaseAdminFetch } from "@/lib/supabase-admin";
 import { parseSupporterPayload } from "@/lib/validation";
+import { toAnalyticsRow } from "@/lib/analytics";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -211,12 +212,15 @@ export async function POST(request: Request) {
     const payload = parseSupporterPayload(input);
 
     if (LOCAL_PREVIEW_MODE) {
-      return NextResponse.json({ message: LOCAL_PREVIEW_MESSAGE });
+      return NextResponse.json({ message: LOCAL_PREVIEW_MESSAGE, saved: false });
     }
 
     // Niewidoczne pole wypełniają zwykle automaty. Człowiek go nie widzi.
     if (payload.website) {
-      return NextResponse.json({ message: "Zgłoszenie zostało przyjęte." }, { status: 200 });
+      return NextResponse.json(
+        { message: "Zgłoszenie zostało przyjęte.", saved: false },
+        { status: 200 }
+      );
     }
 
     const ip = getClientIp(request);
@@ -239,23 +243,49 @@ export async function POST(request: Request) {
       );
     }
 
-    const response = await supabaseAdminFetch("/supporters", {
+    const baseRecord = {
+      first_name: payload.firstName,
+      last_initial: payload.lastInitial,
+      city: payload.city,
+      postal_code: payload.postalCode || null,
+      email: payload.email,
+      adult_confirmed: payload.adult,
+      public_display_consent: payload.publicDisplay,
+      privacy_version: PUBLIC_POSTAL_CODE_PRIVACY_VERSION,
+      status: "pending",
+      ip_hash: ipHash,
+      user_agent: request.headers.get("user-agent")?.slice(0, 500) || null
+    };
+    const attribution = payload.analyticsContext?.attribution;
+    const supporterRecord = {
+      ...baseRecord,
+      utm_source: attribution?.utm_source || null,
+      utm_medium: attribution?.utm_medium || null,
+      utm_campaign: attribution?.utm_campaign || null,
+      utm_content: attribution?.utm_content || null
+    };
+
+    let response = await supabaseAdminFetch("/supporters", {
       method: "POST",
       headers: { Prefer: "return=minimal" },
-      body: JSON.stringify({
-        first_name: payload.firstName,
-        last_initial: payload.lastInitial,
-        city: payload.city,
-        postal_code: payload.postalCode || null,
-        email: payload.email,
-        adult_confirmed: payload.adult,
-        public_display_consent: payload.publicDisplay,
-        privacy_version: PUBLIC_POSTAL_CODE_PRIVACY_VERSION,
-        status: "pending",
-        ip_hash: ipHash,
-        user_agent: request.headers.get("user-agent")?.slice(0, 500) || null
-      })
+      body: JSON.stringify(supporterRecord)
     });
+
+    let responseDetail = response.ok ? "" : await response.text();
+
+    // Pozwala wdrożyć kod przed migracją bazy bez blokowania istniejącego formularza.
+    if (
+      !response.ok &&
+      response.status !== 409 &&
+      /utm_(source|medium|campaign|content)/i.test(responseDetail)
+    ) {
+      response = await supabaseAdminFetch("/supporters", {
+        method: "POST",
+        headers: { Prefer: "return=minimal" },
+        body: JSON.stringify(baseRecord)
+      });
+      responseDetail = response.ok ? "" : await response.text();
+    }
 
     if (response.status === 409) {
       return NextResponse.json(
@@ -265,12 +295,22 @@ export async function POST(request: Request) {
     }
 
     if (!response.ok) {
-      const detail = await response.text();
-      throw new Error(detail || "Nie udało się zapisać zgłoszenia.");
+      throw new Error(responseDetail || "Nie udało się zapisać zgłoszenia.");
+    }
+
+    if (payload.analyticsContext) {
+      await supabaseAdminFetch("/support_funnel_events", {
+        method: "POST",
+        headers: { Prefer: "resolution=ignore-duplicates,return=minimal" },
+        body: JSON.stringify(
+          toAnalyticsRow("support_form_success", payload.analyticsContext)
+        )
+      }).catch(() => null);
     }
 
     return NextResponse.json({
-      message: "Dziękujemy. Zgłoszenie zostało zapisane i czeka na zatwierdzenie."
+      message: "Dziękujemy. Zgłoszenie zostało zapisane i czeka na zatwierdzenie.",
+      saved: true
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Nie udało się zapisać zgłoszenia.";

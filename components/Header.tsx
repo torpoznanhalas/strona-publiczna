@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
+import { MouseEvent, useState, useSyncExternalStore } from "react";
+import { SupporterCounter } from "@/components/SupporterCounter";
 
 const THEME_STORAGE_KEY = "tor-poznan-theme";
 
@@ -20,6 +22,7 @@ function getServerThemeSnapshot() {
 }
 
 export function Header() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const darkMode = useSyncExternalStore(
     subscribeToTheme,
@@ -27,6 +30,21 @@ export function Header() {
     getServerThemeSnapshot
   );
   const closeMenu = () => setOpen(false);
+
+  const handleSupportClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    closeMenu();
+
+    if (window.location.pathname !== "/") return;
+
+    const target = document.getElementById("poparcie");
+    if (!target) return;
+
+    event.preventDefault();
+    if (window.location.hash !== "#poparcie") {
+      window.history.pushState(null, "", "#poparcie");
+    }
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const toggleTheme = () => {
     const nextTheme = darkMode ? "light" : "dark";
@@ -36,8 +54,40 @@ export function Header() {
     window.dispatchEvent(new Event("theme-change"));
   };
 
+  if (pathname === "/poprzyj") {
+    return (
+      <header className="header support-landing-site-header">
+        <div className="container support-landing-header-inner">
+          <Link className="brand" href="/" aria-label="Hałas z Toru Poznań — strona główna">
+            <Image
+              className="brand-logo"
+              src="/logo-transparent.png"
+              width={46}
+              height={46}
+              alt=""
+              priority
+              unoptimized
+            />
+            <span>Hałas z Toru Poznań</span>
+          </Link>
+          <Link className="support-landing-back" href="/">
+            ← Wróć do strony głównej
+          </Link>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header className="header">
+      <div className="promo-bar">
+        <Link href="/#poparcie" onClick={handleSupportClick}>
+          <span className="promo-bar-message">
+            <strong><SupporterCounter /></strong> mieszkańców już poparło apel
+          </span>
+          <span className="promo-bar-action">Dołącz</span>
+        </Link>
+      </div>
       <div className="container header-inner">
         <Link
           className="brand"
@@ -91,8 +141,8 @@ export function Header() {
           <Link href="/kontakt" onClick={closeMenu}>
             Kontakt
           </Link>
-          <Link className="nav-mobile-join" href="/#poparcie" onClick={closeMenu}>
-            Dołącz się
+          <Link className="nav-mobile-join" href="/#poparcie" onClick={handleSupportClick}>
+            Poprzyj apel
           </Link>
         </nav>
         <button
@@ -109,8 +159,8 @@ export function Header() {
             <path className="theme-toggle-shade" d="M12 8a4 4 0 0 0 0 8Z" />
           </svg>
         </button>
-        <Link className="header-join" href="/#poparcie" onClick={closeMenu}>
-          Dołącz się
+        <Link className="header-join" href="/#poparcie" onClick={handleSupportClick}>
+          Poprzyj apel
         </Link>
       </div>
     </header>

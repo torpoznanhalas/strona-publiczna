@@ -30,6 +30,12 @@ Po otrzymaniu wiadomości z adresu e-mail użytego w formularzu:
 - Klucz serwerowy Supabase pozostaje wyłącznie w zmiennych środowiskowych Netlify.
 - Nie publikuj adresów e-mail, kodów pocztowych, adresów IP ani notatek moderatora.
 
+## Lejek kampanii
+
+Widok `support_funnel_by_content` pokazuje dla każdej ścieżki (`page_path`) i każdego `utm_content`
+liczbę wizyt, wyświetleń formularza, rozpoczęć i skutecznych zapisów. Szczegółowe UTM skutecznej
+konwersji są także zapisane w rekordzie `supporters`; nie są publicznie zwracane przez API strony.
+
 
 ## Publiczna lista osób wspierających
 

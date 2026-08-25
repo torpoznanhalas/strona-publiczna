@@ -59,15 +59,6 @@ function removeMetaCookies() {
   }
 }
 
-export function trackMetaLead() {
-  if (typeof window === "undefined" || readConsent() !== "granted" || !window.fbq) return;
-
-  window.fbq("track", "Lead", {
-    content_category: "support",
-    content_name: "lista_wsparcia"
-  });
-}
-
 export function MetaPixel() {
   const pathname = usePathname();
   const [consent, setConsent] = useState<Consent | null>(null);
