@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Children, cloneElement, isValidElement, type ReactNode } from "react";
+import { HistoricalMapCard } from "@/components/HistoricalMapCard";
 
 export const metadata: Metadata = {
   title: "Historia Toru Poznań",
@@ -32,7 +33,10 @@ export default function HistoryPage() {
         <div className="container">
           <div className="history-header">
             <h2 id="historia-toru">Tor Poznań: kto był tu pierwszy?</h2>
-            <p>Fakty, które warto znać, zanim Sejm zmieni prawo</p>
+            <p>
+              Prześledź oś czasu, poznaj fakty o powstaniu Toru Poznań i zobacz, co pokazują
+              archiwalne plany miasta.
+            </p>
           </div>
           <div
             className="history-timeline-scroll"
@@ -45,11 +49,26 @@ export default function HistoryPage() {
                   <h3>LATA 30.</h3>
                   <p>Przeźmierowo zostaje rozparcelowane pod osiedle-ogród (1933 r.). Pierwsze wille powstają jeszcze przed wojną. Stara Ławica rozbudowuje się.</p>
                 </article>
+                <HistoricalMapCard
+                  title="POCZĄTEK LAT 50."
+                  src="/images/history/plan-poznania-poczatek-lat-50.jpg"
+                  alt="Fragment planu Poznania z początku lat 50. obejmujący Przeźmierowo, Wysogotowo i Ławicę."
+                  width={2182}
+                  height={1676}
+                  eager
+                />
                 <article className="history-point">
                   <span className="history-dot history-dot-blue" aria-hidden="true" />
                   <h3>LATA 60.</h3>
                   <p>Kolejne domy powstają w bezpośrednim sąsiedztwie terenu, na którym dziś leży tor. Od 1968 r. wzdłuż ulicy Bukowskiej buduje się Osiedle Bajkowe, intensywnie rozrastają się Smochowice i Wola, istniejące już dużo wcześniej. Do 1976 r. ukształtowała się już tu docelowa siatka ulic i zabudowań.</p>
                 </article>
+                <HistoricalMapCard
+                  title="PLAN POZNANIA Z 1974 ROKU"
+                  src="/images/history/plan-poznania-1974.jpg"
+                  alt="Fragment planu Poznania z 1974 roku obejmujący Ławicę, Wolę, Smochowice i teren portu lotniczego."
+                  width={996}
+                  height={835}
+                />
                 <article className="history-point history-point-alert">
                   <span className="history-dot history-dot-red" aria-hidden="true" />
                   <h3>1975</h3>
