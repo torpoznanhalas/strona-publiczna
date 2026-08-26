@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MouseEvent, useState, useSyncExternalStore } from "react";
 import { SupporterCounter } from "@/components/SupporterCounter";
+import { siteFeatures } from "@/lib/site-features";
 
 const THEME_STORAGE_KEY = "tor-poznan-theme";
 
@@ -80,14 +81,16 @@ export function Header() {
 
   return (
     <header className="header">
-      <div className="promo-bar">
-        <Link href="/#poparcie" onClick={handleSupportClick}>
-          <span className="promo-bar-message">
-            <strong><SupporterCounter /></strong> mieszkańców już poparło apel
-          </span>
-          <span className="promo-bar-action">Dołącz</span>
-        </Link>
-      </div>
+      {siteFeatures.showPromoBar && (
+        <div className="promo-bar">
+          <Link href="/#poparcie" onClick={handleSupportClick}>
+            <span className="promo-bar-message">
+              <strong><SupporterCounter /></strong> mieszkańców już poparło apel
+            </span>
+            <span className="promo-bar-action">Dołącz</span>
+          </Link>
+        </div>
+      )}
       <div className="container header-inner">
         <Link
           className="brand"

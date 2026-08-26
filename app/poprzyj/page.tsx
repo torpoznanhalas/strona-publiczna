@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SupporterCounter } from "@/components/SupporterCounter";
 import { SupportForm } from "@/components/SupportForm";
+import { siteFeatures } from "@/lib/site-features";
 
 export const metadata: Metadata = {
   title: "Poprzyj apel mieszkańców",
@@ -69,9 +70,11 @@ export default function SupportLandingPage() {
       <section className="support-landing-form-section">
         <div className="container support-landing-form-container">
           <div className="support-landing-form-header section-anchor" id="poparcie">
-            <p className="support-landing-proof">
-              Już <strong><SupporterCounter /></strong> mieszkańców poparło apel
-            </p>
+            {siteFeatures.showSupporterCount && (
+              <p className="support-landing-proof">
+                Już <strong><SupporterCounter /></strong> mieszkańców poparło apel
+              </p>
+            )}
             <h2>Poprzyj apel mieszkańców</h2>
           </div>
           <SupportForm variant="landing" />

@@ -7,6 +7,7 @@ import {
   SupportersResponse,
   useSupporters
 } from "@/components/SupportersProvider";
+import { siteFeatures } from "@/lib/site-features";
 
 const dateFormatter = new Intl.DateTimeFormat("pl-PL", {
   day: "2-digit",
@@ -121,9 +122,11 @@ export function SupporterDirectory() {
           <p className="supporter-directory-eyebrow">Publiczna lista poparcia</p>
           <h3>Osoby, które dołączyły</h3>
         </div>
-        <span className="supporter-directory-count">
-          {data ? publicCount : displayCount}
-        </span>
+        {siteFeatures.showSupporterCount && (
+          <span className="supporter-directory-count">
+            {data ? publicCount : displayCount}
+          </span>
+        )}
       </div>
       <div
         className="supporter-directory-scroll"
