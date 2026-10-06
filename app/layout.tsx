@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Barlow } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -8,10 +8,19 @@ import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { Suspense } from "react";
 import { SupportersProvider } from "@/components/SupportersProvider";
 
-const barlow = Barlow({
-  subsets: ["latin", "latin-ext"],
-  weight: ["700", "800"],
-  style: "normal",
+const barlow = localFont({
+  src: [
+    {
+      path: "./fonts/Barlow-Bold.otf",
+      weight: "700",
+      style: "normal"
+    },
+    {
+      path: "./fonts/Barlow-ExtraBold.otf",
+      weight: "800",
+      style: "normal"
+    }
+  ],
   display: "swap",
   variable: "--font-barlow"
 });
